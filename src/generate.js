@@ -77,6 +77,10 @@ const NAV_ICONS = {
 const CHEV_LEFT = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="15 5 8 12 15 19"/></svg>';
 const CHEV_RIGHT = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 5 16 12 9 19"/></svg>';
 const UP_ARROW = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 15 12 9 18 15"/></svg>';
+// Download arrow shown on the compact mobile row button (the word
+// "Download" is the desktop label; on phones the 44px icon button
+// frees the text column so the rating and category stay visible).
+const DL_ICON = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v11"/><polyline points="6 10 12 16 18 10"/><line x1="5" y1="21" x2="19" y2="21"/></svg>';
 
 // Minimal app index for the header live search, embedded as JSON in every
 // page (no extra fetch, instant on first keystroke). Only the fields the
@@ -205,12 +209,15 @@ function rowHTML(a, opts) {
   const rank = opts && opts.rank != null
     ? `<span class="rank${opts.rank <= 3 ? ' top' : ''}" aria-hidden="true">${opts.rank}</span>` : '';
   const cat = opts && opts.category ? ` · ${esc(a.category)}` : '';
+  // The name+meta is ONE block link (min-height 44px via CSS) so the
+  // row's main tap target is a proper target; the Download control
+  // stays a separate sibling link — never nested links.
   return `<div class="row" data-name="${esc((a.name + ' ' + a.category + ' ' + (a.tags || []).join(' ')).toLowerCase())}" data-cat="${esc(a.category)}" data-mod="${a.signed_type === 'mod' ? '1' : '0'}">`
     + rank
     + `<div class="ic" style="background:${esc(a.icon_colour)}">${esc(a.icon_initials)}</div>`
-    + `<div class="tx"><div class="nm"><a href="/apps/${esc(a.slug)}/">${esc(a.name)}</a></div>`
-    + `<div class="mt">v${esc(tbd(a.version))} · ${esc(size)} · ★ <b>${esc(rating)}</b>${cat}</div></div>`
-    + `<a class="dl" href="/apps/${esc(a.slug)}/">Download</a></div>`;
+    + `<a class="tx" href="/apps/${esc(a.slug)}/"><span class="nm">${esc(a.name)}</span>`
+    + `<span class="mt"><span class="m1">v${esc(tbd(a.version))} · ${esc(size)}</span><span class="msep"> · </span><span class="m2">★ <b>${esc(rating)}</b>${cat}</span></span></a>`
+    + `<a class="dl" href="/apps/${esc(a.slug)}/" aria-label="Download ${esc(a.name)}"><span class="dl-tx">Download</span>${DL_ICON}</a></div>`;
 }
 
 function jsonLdApp(a) {

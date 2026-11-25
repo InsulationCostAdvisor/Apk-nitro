@@ -16,15 +16,18 @@ img, svg { display: block; }
 /* ---------- header: white bar, navy wordmark, red active nav ---------- */
 .s-header { background: var(--header-bar-bg); color: var(--header-bar-text); padding: 10px 16px; display: flex; align-items: center; position: sticky; top: 0; z-index: 30; border-bottom: 1px solid var(--line); }
 .s-header .inner { display: flex; align-items: center; gap: 16px; width: 100%; }
-.s-header .logo { display: flex; align-items: center; gap: 8px; font-family: var(--font-display); font-weight: 800; font-style: italic; font-size: 20px; letter-spacing: -0.5px; white-space: nowrap; color: var(--header-bar-text); }
+.s-header .logo { display: flex; align-items: center; gap: 8px; font-family: var(--font-display); font-weight: 800; font-style: italic; font-size: 20px; letter-spacing: -0.5px; white-space: nowrap; color: var(--header-bar-text); min-height: 44px; }
 .s-header .logo svg { width: 26px; height: 26px; }
 .s-header .nav { display: flex; gap: 2px; margin: 0 auto; }
-.s-header .nav a { display: flex; align-items: center; gap: 6px; font-size: 13.5px; font-weight: 600; color: var(--header-bar-nav); padding: 8px 10px; border-radius: 8px; white-space: nowrap; }
+.s-header .nav a { display: flex; align-items: center; gap: 6px; font-size: 13.5px; font-weight: 600; color: var(--header-bar-nav); padding: 8px 10px; min-height: 44px; border-radius: 8px; white-space: nowrap; }
 .s-header .nav a svg { width: 16px; height: 16px; flex: 0 0 auto; }
 .s-header .nav a:hover { color: var(--header-bar-text); }
 .s-header .nav a[aria-current="page"] { color: var(--red); font-weight: 700; }
 .h-actions { display: flex; align-items: center; gap: 2px; }
-.icon-btn { display: flex; align-items: center; justify-content: center; width: 36px; height: 36px; flex: 0 0 auto; background: transparent; border: 0; border-radius: 8px; color: var(--header-bar-nav); padding: 0; }
+/* 44px tap targets (2026-11-25 mobile fix): header icon buttons were
+   36px — below the 44px minimum, so they grew. The header bar is 8px
+   taller on desktop as a result; the sticky bar and layout are unchanged. */
+.icon-btn { display: flex; align-items: center; justify-content: center; width: 44px; height: 44px; flex: 0 0 auto; background: transparent; border: 0; border-radius: 8px; color: var(--header-bar-nav); padding: 0; }
 .icon-btn:hover { color: var(--header-bar-text); background: var(--bg); }
 .icon-btn svg { width: 20px; height: 20px; }
 .theme-btn .ic-sun { display: none; }
@@ -41,7 +44,9 @@ img, svg { display: block; }
 .h-search { display: flex; align-items: center; }
 .h-search-box { position: absolute; top: 100%; left: 0; right: 0; background: var(--header-bar-bg); border-bottom: 1px solid var(--line); padding: 8px 12px; opacity: 0; visibility: hidden; transition: opacity .15s ease, visibility 0s linear .15s; }
 .h-search.open .h-search-box { opacity: 1; visibility: visible; transition: opacity .15s ease; }
-.h-search-box input { width: 100%; height: 40px; border: 1px solid var(--line); background: var(--bg); border-radius: 8px; padding: 0 12px; color: var(--ink); font-size: 14px; outline: 0; font-family: var(--font-body); }
+/* 16px input text (2026-11-25 mobile fix): iOS Safari auto-zooms on
+   focus for any input under 16px. All search inputs are 16px now. */
+.h-search-box input { width: 100%; height: 44px; border: 1px solid var(--line); background: var(--bg); border-radius: 8px; padding: 0 12px; color: var(--ink); font-size: 16px; outline: 0; font-family: var(--font-body); }
 .h-search-box input::placeholder { color: var(--meta); }
 .h-search-box input:focus { border-color: var(--header-bar-nav); }
 .h-search-results { position: absolute; top: calc(100% + 57px); right: 12px; width: 320px; max-width: calc(100vw - 24px); max-height: 360px; overflow-y: auto; background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 4px; z-index: 40; }
@@ -68,10 +73,10 @@ img, svg { display: block; }
 .s-hero p { margin-top: 8px; font-size: 14px; color: var(--hero-sub); max-width: 520px; }
 .s-hero p.hero-intro { margin-top: 10px; font-size: 13px; line-height: 1.55; color: var(--hero-sub); max-width: 560px; }
 .s-hero .hero-search { margin-top: 16px; display: flex; gap: 8px; max-width: 520px; }
-.s-hero .hero-search input { flex: 1; min-width: 0; border: 1px solid var(--hero-input-border); background: var(--hero-input-bg); border-radius: 9px; padding: 12px 14px; color: var(--hero-input-text); font-size: 14px; outline: 0; font-family: var(--font-body); }
+.s-hero .hero-search input { flex: 1; min-width: 0; border: 1px solid var(--hero-input-border); background: var(--hero-input-bg); border-radius: 9px; padding: 12px 14px; min-height: 44px; color: var(--hero-input-text); font-size: 16px; outline: 0; font-family: var(--font-body); }
 .s-hero .hero-search input::placeholder { color: var(--hero-input-placeholder); }
 .s-hero .hero-search button { border: 1px solid var(--hero-btn-border); border-radius: 9px; background: var(--hero-btn-bg); color: var(--hero-btn-text); font-weight: 700; font-size: 14px; padding: 0 20px; min-height: 44px; }
-.hero-cta { display: inline-block; margin-top: 16px; background: var(--red); color: var(--p-white); font-weight: 700; font-size: 14px; padding: 12px 22px; border-radius: 9px; }
+.hero-cta { display: inline-flex; align-items: center; min-height: 44px; margin-top: 16px; background: var(--red); color: var(--p-white); font-weight: 700; font-size: 14px; padding: 12px 22px; border-radius: 9px; }
 
 /* ---------- homepage carousel: "Indispensable on your phone" ---------- */
 /* Full-width: the track runs from the left gutter to the right edge —
@@ -82,7 +87,7 @@ img, svg { display: block; }
 .carousel-head h2 .flame { color: var(--red); display: flex; }
 .carousel-head h2 .flame svg { width: 18px; height: 18px; }
 .carousel-arrows { display: flex; gap: 6px; }
-.car-arrow { width: 36px; height: 36px; flex: 0 0 auto; display: flex; align-items: center; justify-content: center; border: 1px solid var(--line); background: var(--surface); color: var(--ink); border-radius: 8px; padding: 0; }
+.car-arrow { width: 44px; height: 44px; flex: 0 0 auto; display: flex; align-items: center; justify-content: center; border: 1px solid var(--line); background: var(--surface); color: var(--ink); border-radius: 8px; padding: 0; }
 .car-arrow svg { width: 18px; height: 18px; }
 /* No visible scrollbar under the carousel (2026-11-25): the track still
    scrolls for swipe and arrows, but no track/thumb shows in any browser. */
@@ -103,7 +108,7 @@ img, svg { display: block; }
 .s-sec h2, .s-sec h3 { font-family: var(--font-display); font-weight: 800; font-size: 15px; margin-bottom: 4px; }
 .s-sec .sub { font-size: 12px; color: var(--meta); margin-bottom: 10px; }
 .chips { display: flex; gap: 8px; overflow-x: auto; padding: 2px 0 10px; scrollbar-width: none; }
-.chips a { flex: 0 0 auto; font-size: 12px; font-weight: 600; padding: 7px 13px; border-radius: 999px; border: 1px solid var(--chip-border); background: var(--surface); color: var(--ink); }
+.chips a { flex: 0 0 auto; display: inline-flex; align-items: center; justify-content: center; min-width: 44px; min-height: 44px; font-size: 12px; font-weight: 600; padding: 7px 13px; border-radius: 999px; border: 1px solid var(--chip-border); background: var(--surface); color: var(--ink); }
 .chips a.on { background: var(--chip-on-bg); color: var(--header-text); border-color: var(--chip-on-bg); }
 .rows { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; overflow: hidden; }
 .row { display: flex; align-items: center; gap: 12px; height: 72px; padding: 0 12px; border-bottom: 1px solid var(--line); }
@@ -116,11 +121,16 @@ img, svg { display: block; }
 .row[hidden] { display: none; }
 .row:last-child { border-bottom: 0; }
 .row .ic { flex: 0 0 48px; width: 48px; height: 48px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-family: var(--font-display); font-weight: 900; font-style: italic; font-size: 19px; color: var(--header-text); }
-.row .tx { flex: 1; min-width: 0; }
-.row .nm { font-family: var(--font-display); font-weight: 800; font-size: 16px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-.row .mt { font-size: 13px; color: var(--meta); margin-top: 2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+/* The name+meta is one block link (2026-11-25 mobile fix): the whole
+   text column is the tap target, min-height 44px, so the row's main
+   link is no longer a 17px-tall strip. Spans are block-level so the
+   ellipsis rules still apply. */
+.row .tx { flex: 1; min-width: 0; display: flex; flex-direction: column; justify-content: center; min-height: 44px; }
+.row .nm { display: block; font-family: var(--font-display); font-weight: 800; font-size: 16px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.row .mt { display: block; font-size: 13px; color: var(--meta); margin-top: 2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .row .mt b { color: var(--ink); font-weight: 600; }
-.row .dl { flex: 0 0 auto; background: var(--btn-navy); color: var(--header-text); border: 0; border-radius: 8px; font-weight: 700; font-size: 12.5px; padding: 10px 14px; min-height: 40px; white-space: nowrap; }
+.row .dl { flex: 0 0 auto; background: var(--btn-navy); color: var(--header-text); border: 0; border-radius: 8px; font-weight: 700; font-size: 12.5px; padding: 10px 14px; min-height: 44px; white-space: nowrap; }
+.row .dl svg { display: none; }
 .row .dl small { font-weight: 600; opacity: 0.75; }
 .row .rank { flex: 0 0 30px; width: 30px; font-family: var(--font-display); font-weight: 900; font-style: italic; font-size: 26px; line-height: 1; color: var(--meta); text-align: center; }
 .row .rank.top { color: var(--red); }
@@ -147,7 +157,7 @@ img, svg { display: block; }
    Both are driven by the --foot-* tokens (see tokens.css). */
 .s-foot { background: var(--foot-bg); color: var(--foot-text); padding: 32px 16px 24px; margin-top: 18px; }
 .f-cols { display: grid; grid-template-columns: 1.4fr 1fr 1fr 1fr; gap: 24px; }
-.f-logo { display: flex; align-items: center; gap: 8px; font-family: var(--font-display); font-weight: 800; font-style: italic; font-size: 20px; letter-spacing: -0.5px; white-space: nowrap; color: var(--foot-heading); }
+.f-logo { display: flex; align-items: center; gap: 8px; font-family: var(--font-display); font-weight: 800; font-style: italic; font-size: 20px; letter-spacing: -0.5px; white-space: nowrap; color: var(--foot-heading); min-height: 44px; }
 .f-logo svg { width: 26px; height: 26px; }
 .f-tag { margin-top: 10px; font-size: 14px; font-weight: 600; color: var(--foot-heading); }
 .f-note { margin-top: 8px; font-size: 12.5px; line-height: 1.7; color: var(--foot-link); }
@@ -187,7 +197,11 @@ img, svg { display: block; }
 
 .shots { padding: 14px 16px 0; }
 .shots h2 { font-family: var(--font-display); font-weight: 800; font-size: 15px; margin-bottom: 10px; }
-.shot-row { display: flex; gap: 10px; overflow-x: auto; padding-bottom: 6px; scrollbar-width: thin; }
+/* No visible scrollbar on the screenshot strip either (2026-11-25
+   mobile fix): the carousel hides its scrollbar; this strip showed a
+   grey track. Swipe still works. */
+.shot-row { display: flex; gap: 10px; overflow-x: auto; padding-bottom: 6px; scrollbar-width: none; -ms-overflow-style: none; }
+.shot-row::-webkit-scrollbar { display: none; }
 .shot { flex: 0 0 150px; height: 260px; border-radius: 14px; position: relative; overflow: hidden; border: 1px solid var(--line); background: var(--navy); }
 .shot .big { position: absolute; top: 34%; left: 0; right: 0; text-align: center; font-family: var(--font-display); font-weight: 900; font-style: italic; font-size: 22px; color: var(--header-text); }
 .shot .cap { position: absolute; left: 0; right: 0; bottom: 0; padding: 8px 10px; font-size: 11.5px; font-weight: 600; color: var(--header-text); background: var(--scrim); }
@@ -201,7 +215,7 @@ img, svg { display: block; }
 .ver { display: flex; align-items: center; gap: 10px; background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 11px 12px; margin-bottom: 8px; font-size: 13px; }
 .ver .v { font-weight: 700; }
 .ver .m { color: var(--meta); font-size: 12.5px; }
-.ver .vd { margin-left: auto; border: 1px solid var(--navy); background: transparent; color: var(--ink); border-radius: 7px; font-weight: 700; font-size: 12px; padding: 8px 12px; min-height: 36px; }
+.ver .vd { margin-left: auto; border: 1px solid var(--navy); background: transparent; color: var(--ink); border-radius: 7px; font-weight: 700; font-size: 12px; padding: 8px 12px; min-height: 44px; }
 .ver .vd.disabled { opacity: 0.55; cursor: default; }
 
 /* ---------- sticky bottom download bar (same button relocated) ---------- */
@@ -221,7 +235,7 @@ img, svg { display: block; }
    the primary download button and the header are shadowed). */
 .to-top { position: fixed; right: 16px; bottom: calc(16px + env(safe-area-inset-bottom, 0px)); z-index: 26; width: 48px; height: 48px; border-radius: 50%; border: 0; background: var(--to-top-bg); color: var(--to-top-text); display: flex; align-items: center; justify-content: center; opacity: 0; visibility: hidden; transform: translateY(8px); transition: opacity .25s ease, visibility 0s linear .25s, transform .25s ease, bottom .25s ease, background-color .25s ease; }
 .to-top svg { width: 20px; height: 20px; }
-.to-top.visible { opacity: .85; visibility: visible; transform: translateY(0); transition: opacity .25s ease, visibility 0s, transform .25s ease, bottom .25s ease, background-color .25s ease; }
+.to-top.visible { opacity: 1; visibility: visible; transform: translateY(0); transition: opacity .25s ease, visibility 0s, transform .25s ease, bottom .25s ease, background-color .25s ease; }
 .to-top.visible:hover { opacity: 1; background: var(--to-top-bg-hover); }
 .to-top:focus-visible { outline: 2px solid var(--red); outline-offset: 2px; opacity: 1; }
 /* App pages: the sticky download bar is 65px tall (44px button + 10px +
@@ -236,7 +250,7 @@ img, svg { display: block; }
 
 /* ---------- search page form ---------- */
 .search-page-form { max-width: 520px; display: flex; gap: 8px; margin-bottom: 14px; }
-.search-page-form input { flex: 1; min-width: 0; border: 1px solid var(--line); background: var(--surface); border-radius: 9px; padding: 12px 14px; color: var(--ink); font-size: 14px; outline: 0; font-family: var(--font-body); }
+.search-page-form input { flex: 1; min-width: 0; border: 1px solid var(--line); background: var(--surface); border-radius: 9px; padding: 12px 14px; min-height: 44px; color: var(--ink); font-size: 16px; outline: 0; font-family: var(--font-body); }
 .search-page-form input::placeholder { color: var(--meta); }
 .search-page-form button { border: 0; border-radius: 9px; background: var(--btn-navy); color: var(--header-text); font-weight: 700; font-size: 14px; padding: 0 20px; min-height: 44px; }
 
@@ -246,8 +260,15 @@ img, svg { display: block; }
   .s-header .inner { flex-wrap: wrap; gap: 8px; }
   .s-header .nav { display: none; }
   .nav-toggle { display: flex; }
-  .s-header .nav.open { display: flex; flex-wrap: wrap; width: 100%; padding-top: 8px; margin: 0; gap: 2px; }
-  .s-header .nav.open a { flex: 1 1 40%; }
+  /* Menu open (2026-11-25 mobile fix): flex lines fill in DOM order, so
+     with the nav at width:100% the icon buttons used to fall to a row
+     UNDER the nav links. Order puts the logo + icon row first and the
+     nav below it, so the hamburger stays on the first line and can
+     close the menu. */
+  .s-header .logo { order: 1; }
+  .h-actions { order: 2; }
+  .s-header .nav.open { display: flex; flex-wrap: wrap; width: 100%; padding-top: 8px; margin: 0; gap: 2px; order: 3; }
+  .s-header .nav.open a { flex: 1 1 40%; min-height: 44px; }
   .carousel-arrows { display: none; }
   .card { flex-basis: 200px; }
   /* Mobile hero is 100vh (user instruction 2026-11-25) — the catalogue
@@ -259,7 +280,6 @@ img, svg { display: block; }
   .s-hero p.hero-intro { margin-top: 8px; font-size: 12px; }
   .s-hero .hero-search { margin-top: 8px; }
   .s-hero .hero-search input { padding: 10px 12px; }
-  .s-hero .hero-search button { min-height: 40px; }
   .hero-cta { margin-top: 12px; }
   .s-sec { padding: 12px 16px 6px; }
   .chips { padding: 2px 0 8px; }
@@ -268,7 +288,25 @@ img, svg { display: block; }
   .f-cols { grid-template-columns: 1fr; gap: 20px; }
   .s-foot { padding: 28px 16px 22px; }
   .g-ic { font-size: 24px; border-radius: 14px; }
-  .row .rank { flex-basis: 22px; width: 22px; font-size: 20px; }
+  /* Mobile rows (2026-11-25 fix): the ~91px "Download" word button
+     squeezed the text column so the rating and category were cut off.
+     On phones the button is a 44px download-arrow icon, the rank is
+     20px and the gap is 10px — the text column gains ~55px, enough for
+     the full "v2.41.0 · 148 MB · ★ 4.4 · Games" line. Rows stay 72px. */
+  .row { gap: 10px; }
+  .row .rank { flex-basis: 20px; width: 20px; font-size: 20px; }
+  .row .dl { width: 44px; height: 44px; min-height: 44px; padding: 0; display: flex; align-items: center; justify-content: center; }
+  .row .dl .dl-tx { display: none; }
+  .row .dl svg { display: block; width: 20px; height: 20px; }
+  /* Mobile meta wraps to two lines (2026-11-25 fix): even with the
+     compact icon, the full one-line meta ("v2.41.0 · 148 MB · ★ 4.4 ·
+     Video Editor") is ~235px — wider than the ~190px text column — so
+     the category still clipped ("Vid…"). Splitting version/size from
+     rating/category keeps every fact visible without shrinking text
+     below 12px or hiding anything. Name + two meta lines is ~57px,
+     still inside the 72px row. Desktop keeps the single line. */
+  .row .mt .m1, .row .mt .m2 { display: block; }
+  .row .mt .msep { display: none; }
 }
 @media (min-width: 641px) {
   .s-header .inner { flex-wrap: nowrap; }
@@ -281,7 +319,7 @@ img, svg { display: block; }
   .h-search { position: relative; }
   .h-search-box { position: static; width: 0; padding: 0; border: 0; background: transparent; overflow: hidden; transition: width .18s ease, opacity .15s ease, visibility 0s linear .18s; }
   .h-search.open .h-search-box { width: 248px; transition: width .18s ease, opacity .15s ease; }
-  .h-search-box input { width: 248px; height: 36px; }
+  .h-search-box input { width: 248px; height: 44px; }
   .h-search-results { top: calc(100% + 12px); right: 0; width: 320px; max-width: calc(100vw - 32px); }
 }
 @media (prefers-reduced-motion: reduce) {
