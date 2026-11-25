@@ -68,6 +68,7 @@
   --hero-btn-text: var(--p-navy);
   --hero-overlay: var(--p-hero-overlay);
   --chip-border: var(--line);
+  --chip-on-bg: var(--navy);
   --card-strip: var(--p-offwhite);
   --star: var(--p-navy);
   --trust-border: var(--green);
@@ -100,4 +101,8 @@
   --card-strip: var(--p-navy-2);
   --star: var(--p-offwhite);
   --chip-border: var(--line);
+  /* Active filter chip: in dark mode the old --navy bg (#0B1B30) was
+     nearly identical to the chip surface (#101828), so the active state
+     was invisible and the filter looked dead. Lighter navy here. */
+  --chip-on-bg: var(--p-navy-4);
 }

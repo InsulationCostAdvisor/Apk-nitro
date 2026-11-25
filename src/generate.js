@@ -290,7 +290,7 @@ function main() {
     CAROUSEL: carouselHTML(apps),
     ROWS_TRENDING: byDownloads.slice(0, 8).map((a, i) => rowHTML(a, { rank: i + 1, category: true })).join(''),
     GRID_LATEST: latestGridHTML(apps),
-    ROWS_CHARTS: byDownloads.slice(2, 8).map(rowHTML).join(''),
+    ROWS_CHARTS: byDownloads.slice(2, 8).map((a, i) => rowHTML(a, { rank: i + 1, category: true })).join(''),
   }));
   pages.push(['index.html', SITE_URL + '/']);
 

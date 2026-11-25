@@ -108,9 +108,16 @@ img, svg { display: block; }
 .s-sec .sub { font-size: 12px; color: var(--meta); margin-bottom: 10px; }
 .chips { display: flex; gap: 8px; overflow-x: auto; padding: 2px 0 10px; scrollbar-width: none; }
 .chips a { flex: 0 0 auto; font-size: 12px; font-weight: 600; padding: 7px 13px; border-radius: 999px; border: 1px solid var(--chip-border); background: var(--surface); color: var(--ink); }
-.chips a.on { background: var(--navy); color: var(--header-text); border-color: var(--navy); }
+.chips a.on { background: var(--chip-on-bg); color: var(--header-text); border-color: var(--chip-on-bg); }
 .rows { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; overflow: hidden; }
 .row { display: flex; align-items: center; gap: 12px; height: 72px; padding: 0 12px; border-bottom: 1px solid var(--line); }
+/* Root cause of the dead Trending filter chips: the hidden attribute only
+   hides through the UA stylesheet ([hidden]{display:none}), which loses to
+   ANY author display rule — and .row sets display:flex. So rows the filter
+   marked hidden stayed visible and the clicks looked dead (the same bug
+   also broke search-page filtering). This author rule restores [hidden]
+   for rows: specificity (0,2,0) beats .row (0,1,0). */
+.row[hidden] { display: none; }
 .row:last-child { border-bottom: 0; }
 .row .ic { flex: 0 0 48px; width: 48px; height: 48px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-family: var(--font-display); font-weight: 900; font-style: italic; font-size: 19px; color: var(--header-text); }
 .row .tx { flex: 1; min-width: 0; }
