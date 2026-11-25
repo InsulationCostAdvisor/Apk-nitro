@@ -60,7 +60,10 @@ img, svg { display: block; }
 
 /* ---------- hero — homepage only ---------- */
 /* Full-bleed background image (2026-11-25, user-approved): hero-bg.webp
-   covers the whole hero, 100vh tall (100svh where supported). Flat look —
+   covers the whole hero, 100vh tall (100svh where supported) on desktop;
+   on mobile (≤640px) the hero is content-height instead — the 100vh
+   version left ~295px of empty background under the Browse Apps button
+   (user instruction 2026-11-25). Flat look —
    a solid uniform navy overlay keeps the text readable, no gradient, no
    glass, no shadows except the primary button. The image is generated in
    the brand palette (navy/red/white, six realistic app icons, no letter,
@@ -277,10 +280,13 @@ img, svg { display: block; }
   .s-header .nav.open a { flex: 1 1 40%; min-height: 44px; }
   .carousel-arrows { display: none; }
   .card { flex-basis: 200px; }
-  /* Mobile hero is 100vh (user instruction 2026-11-25) — the catalogue
-     sits below the fold on phones. Background shifted so the icons stay
+  /* Mobile hero is content-height (2026-11-25, user instruction): the
+     100vh hero left ~295px of empty background under the Browse Apps
+     button on phones. On mobile the hero is only as tall as its
+     content (+ 24px padding) so the carousel follows shortly after.
+     Desktop keeps 100vh. Background shifted so the icons stay
      visible on the right and the text stays readable over the overlay. */
-  .s-hero { padding: 10px 16px; background-position: 72% center; }
+  .s-hero { min-height: 0; padding: 24px 16px; background-position: 72% center; }
   .s-hero h1 { font-size: 21px; }
   .s-hero p { margin-top: 4px; font-size: 13px; }
   .s-hero p.hero-intro { margin-top: 8px; font-size: 12px; }
