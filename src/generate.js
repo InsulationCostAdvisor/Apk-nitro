@@ -110,6 +110,17 @@ function carouselHTML(list) {
     + `<div class="carousel-track" data-carousel>${ad}${cards}</div></section>`;
 }
 
+function latestGridHTML(list) {
+  // Latest Apps grid: big icon tile, name (max 2 lines), star rating.
+  // Catalogue only, apps.json order, no dates, no "NEW" badges.
+  return list.map((a) =>
+    `<a class="g-card" href="/apps/${esc(a.slug)}/">`
+    + `<div class="g-ic" style="background:${esc(a.icon_colour)}">${esc(a.icon_initials)}</div>`
+    + `<div class="g-nm">${esc(a.name)}</div>`
+    + (a.rating === 'tbd' ? '' : `<div class="g-rt"><span class="st">★</span> ${esc(a.rating)}</div>`)
+    + `</a>`).join('');
+}
+
 function footer() {
   return `<footer class="s-foot"><div class="wrap">
   <b>ApkNitro</b> — fast APK downloads.<br>
@@ -278,6 +289,7 @@ function main() {
     SCRIPTS,
     CAROUSEL: carouselHTML(apps),
     ROWS_TRENDING: byDownloads.slice(0, 8).map((a, i) => rowHTML(a, { rank: i + 1, category: true })).join(''),
+    GRID_LATEST: latestGridHTML(apps),
     ROWS_CHARTS: byDownloads.slice(2, 8).map(rowHTML).join(''),
   }));
   pages.push(['index.html', SITE_URL + '/']);
