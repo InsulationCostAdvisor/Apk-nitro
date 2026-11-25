@@ -16,10 +16,14 @@ export function init() {
     return mq && mq.matches ? 'dark' : 'light';
   }
   function apply(t) {
-    if (t === 'dark') root.setAttribute('data-theme', 'dark');
-    else if (t === 'light') root.setAttribute('data-theme', 'light');
-    else root.removeAttribute('data-theme');
     var eff = effective(t);
+    // Always set an explicit data-theme: there is no
+    // prefers-color-scheme media query in the CSS, so removing the
+    // attribute for 'system' would render light even on a dark system
+    // while the icon/label (derived from effective()) said dark — and
+    // a system -> light click would then show no visible change.
+    // The rendered theme now always equals the effective theme.
+    root.setAttribute('data-theme', eff);
     btn.setAttribute('data-icon', eff === 'dark' ? 'sun' : 'moon');
     btn.setAttribute('aria-label', eff === 'dark' ? 'Switch to light theme' : 'Switch to dark theme');
   }
@@ -38,7 +42,12 @@ export function init() {
     // Smooth cross-fade, only for this user-initiated switch: the class
     // enables the CSS transition, then is removed after the fade. The
     // first page load never gets the class, so it never fades in.
+    // The forced reflow below is load-bearing: without it the class
+    // and the new theme land in the same frame, the browser computes
+    // styles once with both changes, and there is no "before" state
+    // to transition from — the switch snaps instead of fading.
     root.classList.add('theme-anim');
+    void root.offsetHeight;
     if (animTimer) clearTimeout(animTimer);
     animTimer = setTimeout(function () { root.classList.remove('theme-anim'); }, 350);
     apply(current);

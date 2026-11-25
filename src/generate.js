@@ -91,7 +91,7 @@ function header(active) {
     ['/mods/', 'Mods', 'mods'], ['/charts/', 'Top charts', 'charts'],
   ].map(([href, label, icon]) =>
     `<a href="${href}"${active === href ? ' aria-current="page"' : ''}>${NAV_ICONS[icon]}${label}</a>`).join('');
-  return `<header class="s-header" id="top"><div class="inner wrap">
+  return `<header class="s-header"><div class="inner wrap">
   <a class="logo" href="/">${LOGO_N}<span>APKNITRO</span></a>
   <nav class="nav" aria-label="Main">${nav}</nav>
   <div class="h-actions">
@@ -170,7 +170,7 @@ function footer() {
 </div></footer>`;
 }
 
-const THEME_SCRIPT = `<script>(function(){try{var t=localStorage.getItem('apknitro-theme');if(t==='dark'||t==='light')document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>`;
+const THEME_SCRIPT = `<script>(function(){try{var t=localStorage.getItem('apknitro-theme');var d=t==='dark'?'dark':t==='light'?'light':(window.matchMedia&&matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',d);}catch(e){}})();</script>`;
 const SCRIPTS = `<script type="module" src="/js/main.js" defer></script>`;
 
 function head({ title, description, canonical, ogImage, jsonLd }) {

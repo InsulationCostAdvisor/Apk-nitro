@@ -16,11 +16,11 @@
 <link rel="stylesheet" href="/css/tokens.css">
 <link rel="stylesheet" href="/css/main.css">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Montserrat:ital,wght@1,800;1,900&display=swap" rel="stylesheet">
-<script>(function(){try{var t=localStorage.getItem('apknitro-theme');if(t==='dark'||t==='light')document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
+<script>(function(){try{var t=localStorage.getItem('apknitro-theme');var d=t==='dark'?'dark':t==='light'?'light':(window.matchMedia&&matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',d);}catch(e){}})();</script>
 
 </head>
-<body>
-<header class="s-header" id="top"><div class="inner wrap">
+<body id="top">
+<header class="s-header"><div class="inner wrap">
   <a class="logo" href="/"><svg width="26" height="26" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><g fill="#E10600"><g transform="translate(7,0) skewX(-8)">
 <rect x="10" y="8" width="18" height="84" rx="2"/>
 <rect x="72" y="8" width="18" height="84" rx="2"/>

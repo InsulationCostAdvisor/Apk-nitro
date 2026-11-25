@@ -39,6 +39,7 @@
   --p-shadow-bar: rgba(0, 0, 0, 0.12);
   --p-scrim: rgba(0, 0, 0, 0.55);
   --p-hero-overlay: rgba(11, 27, 48, 0.55);
+  --p-hero-overlay-light: rgba(247, 248, 250, 0.85);
 
   /* --- semantic --- */
   --red: var(--p-red);
@@ -60,20 +61,29 @@
   --header-bar-bg: var(--p-white);
   --header-bar-text: var(--p-navy);
   --header-bar-nav: var(--p-meta);
-  --header-input-bg: var(--p-navy-3);
-  --header-input-border: var(--p-navy-line);
-  --header-input-placeholder: var(--p-nav-placeholder);
-  --hero-sub: var(--p-hero-sub);
+  /* Hero input tokens were named --header-input-* but only the hero
+     search ever used them (the header search uses --bg/--ink/--line);
+     renamed to --hero-input-* and given light-mode values here. */
+  --hero-text: var(--p-navy);
+  --hero-bg: var(--p-offwhite);
+  --hero-sub: var(--p-meta);
+  --hero-overlay: var(--p-hero-overlay-light);
+  --hero-input-bg: var(--p-white);
+  --hero-input-border: var(--p-line-2);
+  --hero-input-text: var(--p-navy);
+  --hero-input-placeholder: var(--p-ink-soft-3);
   --hero-btn-bg: var(--p-white);
   --hero-btn-text: var(--p-navy);
-  --hero-overlay: var(--p-hero-overlay);
+  --hero-btn-border: var(--p-navy);
   --chip-border: var(--line);
   --chip-on-bg: var(--navy);
-  --foot-bg: var(--p-navy);
-  --foot-text: var(--p-offwhite);
-  --foot-heading: var(--p-white);
-  --foot-link: var(--p-nav-text);
-  --foot-line: var(--p-navy-line);
+  /* Footer: LIGHT mode is an off-white block with navy text (2026-11-25:
+     the theme switch must visibly change the footer). Dark keeps navy. */
+  --foot-bg: var(--p-offwhite);
+  --foot-text: var(--p-navy);
+  --foot-heading: var(--p-navy);
+  --foot-link: var(--p-meta);
+  --foot-line: var(--p-line);
   --card-strip: var(--p-offwhite);
   --star: var(--p-navy);
   --trust-border: var(--green);
@@ -110,4 +120,21 @@
      nearly identical to the chip surface (#101828), so the active state
      was invisible and the filter looked dead. Lighter navy here. */
   --chip-on-bg: var(--p-navy-4);
+  /* Hero: dark keeps the navy overlay + white text over the same image;
+     light is a light wash with navy text. Footer: dark keeps the navy
+     block; light is off-white (see :root). */
+  --hero-text: var(--p-white);
+  --hero-bg: var(--p-navy);
+  --hero-sub: var(--p-hero-sub);
+  --hero-overlay: var(--p-hero-overlay);
+  --hero-input-bg: var(--p-navy-3);
+  --hero-input-border: var(--p-navy-line);
+  --hero-input-text: var(--p-white);
+  --hero-input-placeholder: var(--p-nav-placeholder);
+  --hero-btn-border: transparent;
+  --foot-bg: var(--p-navy);
+  --foot-text: var(--p-offwhite);
+  --foot-heading: var(--p-white);
+  --foot-link: var(--p-nav-text);
+  --foot-line: var(--p-navy-line);
 }

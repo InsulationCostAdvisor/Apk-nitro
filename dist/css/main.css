@@ -60,7 +60,7 @@ img, svg { display: block; }
    glass, no shadows except the primary button. The image is generated in
    the brand palette (navy/red/white, six realistic app icons, no letter,
    no text in the image). Same image and overlay in both themes. */
-.s-hero { position: relative; min-height: 100vh; min-height: 100svh; background: var(--navy) url(/assets/hero-bg.webp) right center / cover no-repeat; color: var(--header-text); padding: 26px 16px; display: flex; align-items: center; }
+.s-hero { position: relative; min-height: 100vh; min-height: 100svh; background: var(--hero-bg) url(/assets/hero-bg.webp) right center / cover no-repeat; color: var(--hero-text); padding: 26px 16px; display: flex; align-items: center; }
 .s-hero::before { content: ""; position: absolute; inset: 0; background: var(--hero-overlay); }
 .hero-text { position: relative; z-index: 1; flex: 1; min-width: 0; }
 .s-hero h1 { font-family: var(--font-display); font-weight: 900; font-style: italic; font-size: 30px; letter-spacing: -0.5px; line-height: 1.1; }
@@ -68,9 +68,9 @@ img, svg { display: block; }
 .s-hero p { margin-top: 8px; font-size: 14px; color: var(--hero-sub); max-width: 520px; }
 .s-hero p.hero-intro { margin-top: 10px; font-size: 13px; line-height: 1.55; color: var(--hero-sub); max-width: 560px; }
 .s-hero .hero-search { margin-top: 16px; display: flex; gap: 8px; max-width: 520px; }
-.s-hero .hero-search input { flex: 1; min-width: 0; border: 1px solid var(--header-input-border); background: var(--header-input-bg); border-radius: 9px; padding: 12px 14px; color: var(--header-text); font-size: 14px; outline: 0; font-family: var(--font-body); }
-.s-hero .hero-search input::placeholder { color: var(--header-input-placeholder); }
-.s-hero .hero-search button { border: 0; border-radius: 9px; background: var(--hero-btn-bg); color: var(--hero-btn-text); font-weight: 700; font-size: 14px; padding: 0 20px; min-height: 44px; }
+.s-hero .hero-search input { flex: 1; min-width: 0; border: 1px solid var(--hero-input-border); background: var(--hero-input-bg); border-radius: 9px; padding: 12px 14px; color: var(--hero-input-text); font-size: 14px; outline: 0; font-family: var(--font-body); }
+.s-hero .hero-search input::placeholder { color: var(--hero-input-placeholder); }
+.s-hero .hero-search button { border: 1px solid var(--hero-btn-border); border-radius: 9px; background: var(--hero-btn-bg); color: var(--hero-btn-text); font-weight: 700; font-size: 14px; padding: 0 20px; min-height: 44px; }
 .hero-cta { display: inline-block; margin-top: 16px; background: var(--red); color: var(--p-white); font-weight: 700; font-size: 14px; padding: 12px 22px; border-radius: 9px; }
 
 /* ---------- homepage carousel: "Indispensable on your phone" ---------- */
@@ -151,9 +151,9 @@ img, svg { display: block; }
 .ad .lbl { font-size: 10px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--meta); }
 .ad .copy { font-size: 13px; color: var(--meta); margin-top: 6px; }
 
-/* ---------- footer: full-width navy block, 4 columns ---------- */
-/* Same navy block in both themes — the dark override below deliberately
-   does not touch the --foot-* tokens. */
+/* ---------- footer: full-width block, 4 columns ---------- */
+/* Light mode: off-white block, navy text. Dark mode: navy block.
+   Both are driven by the --foot-* tokens (see tokens.css). */
 .s-foot { background: var(--foot-bg); color: var(--foot-text); padding: 32px 16px 24px; margin-top: 18px; }
 .f-cols { display: grid; grid-template-columns: 1.4fr 1fr 1fr 1fr; gap: 24px; }
 .f-logo { display: flex; align-items: center; gap: 8px; font-family: var(--font-display); font-weight: 800; font-style: italic; font-size: 20px; letter-spacing: -0.5px; white-space: nowrap; color: var(--foot-heading); }
@@ -297,6 +297,10 @@ html.theme-anim .s-hero,
 html.theme-anim .s-hero p,
 html.theme-anim .s-hero .hero-search input,
 html.theme-anim .s-hero .hero-search button,
+html.theme-anim .s-hero::before,
+html.theme-anim .s-hero h1,
+html.theme-anim .s-hero h1 em,
+html.theme-anim .hero-cta,
 html.theme-anim .rows,
 html.theme-anim .row,
 html.theme-anim .row .dl,
@@ -309,6 +313,11 @@ html.theme-anim .trust,
 html.theme-anim .dl-primary,
 html.theme-anim .s-foot,
 html.theme-anim .s-foot a,
+html.theme-anim .f-logo,
+html.theme-anim .f-tag,
+html.theme-anim .f-note,
+html.theme-anim .f-col h3,
+html.theme-anim .f-bar,
 html.theme-anim .sec-head a,
 html.theme-anim .h-search-results {
   transition: background-color .3s ease, color .3s ease, border-color .3s ease;
@@ -323,6 +332,10 @@ html.theme-anim .h-search-results {
   html.theme-anim .s-hero p,
   html.theme-anim .s-hero .hero-search input,
   html.theme-anim .s-hero .hero-search button,
+html.theme-anim .s-hero::before,
+html.theme-anim .s-hero h1,
+html.theme-anim .s-hero h1 em,
+html.theme-anim .hero-cta,
   html.theme-anim .rows,
   html.theme-anim .row,
   html.theme-anim .row .dl,
@@ -335,6 +348,11 @@ html.theme-anim .h-search-results {
   html.theme-anim .dl-primary,
   html.theme-anim .s-foot,
   html.theme-anim .s-foot a,
+html.theme-anim .f-logo,
+html.theme-anim .f-tag,
+html.theme-anim .f-note,
+html.theme-anim .f-col h3,
+html.theme-anim .f-bar,
   html.theme-anim .sec-head a,
   html.theme-anim .h-search-results {
     transition: none;
