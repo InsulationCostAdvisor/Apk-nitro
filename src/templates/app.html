@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+{{HEAD}}
+</head>
+<body>
+{{HEADER}}
+<main class="wrap">
+  <div class="app-head">
+    <div class="ic" style="background:{{ICON_COLOUR}}">{{ICON_INITIALS}}</div>
+    <div>
+      <h1 class="nm">{{APP_NAME}}</h1>
+      <div class="dev">by {{DEVELOPER}} · {{CATEGORY}} · v{{VERSION}}</div>
+      <div class="stats">{{STATS}}</div>
+    </div>
+  </div>
+
+  {{DOWNLOAD_PRIMARY}}
+
+  <div class="trust pending">
+    <div class="t1">Scan pending — no scan result yet</div>
+    <div class="t2">SHA-256: not available yet. This file has not been scanned. The scan result, date and SHA-256 will appear here after the first scan.
+    {{TRUST_VARIANT}}</div>
+  </div>
+
+  {{MODNOTES}}
+
+  <div class="shots">
+    <h2>Screenshots</h2>
+    <div class="shot-row">{{SHOTS}}</div>
+  </div>
+
+  <div class="desc">
+    <h2>About this app</h2>
+    <p>{{DESCRIPTION}}</p>
+  </div>
+
+  <div class="vers">
+    <h2>Old versions</h2>
+    {{OLD_VERSIONS}}
+  </div>
+
+  <div class="ad">
+    <div class="lbl">Advertisement</div>
+    <div class="copy">Your ad could be here — clearly labelled, never next to a download button.</div>
+  </div>
+
+  <section class="s-sec" aria-labelledby="similar-h">
+    <h2 id="similar-h">Similar apps</h2>
+    <p class="sub">More {{CATEGORY}} apps</p>
+    <div class="rows">{{ROWS_SIMILAR}}</div>
+  </section>
+</main>
+{{FOOTER}}
+<div class="sticky-dl" id="stickyDl">
+  <div class="ic" style="background:{{ICON_COLOUR}}">{{ICON_INITIALS}}</div>
+  <div class="nm">{{APP_NAME}}<span>v{{VERSION}} · {{SIZE_LABEL}}</span></div>
+  {{DOWNLOAD_STICKY}}
+</div>
+{{SCRIPTS}}
+</body>
+</html>

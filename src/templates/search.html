@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+{{HEAD}}
+</head>
+<body>
+{{HEADER}}
+<main class="wrap">
+  <section class="s-sec" aria-labelledby="search-h">
+    <h2 id="search-h">Search Android APKs and mods on ApkNitro</h2>
+    <p class="sub">10 apps listed · type to search by name</p>
+    <form class="search-page-form" action="/search/" method="get" role="search">
+      <input type="search" name="q" id="search-input" placeholder="Search for an app, game or mod…" aria-label="Search apps" autocomplete="off">
+      <button type="submit">Search</button>
+    </form>
+    <div class="rows" id="search-rows">{{ROWS}}</div>
+    <p class="empty" id="search-empty" hidden>No apps match that search. Try a different name — for example "dooflix" or "capcut".</p>
+  </section>
+</main>
+{{FOOTER}}
+{{SCRIPTS}}
+</body>
+</html>

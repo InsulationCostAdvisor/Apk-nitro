@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 220 180">
+<g transform="translate(60,0)" fill="#E10600"><g transform="translate(7,0) skewX(-8)">
+<rect x="10" y="8" width="18" height="84" rx="2"/>
+<rect x="72" y="8" width="18" height="84" rx="2"/>
+<polygon points="38,6 51.6,33.2 35.6,41.2 22,14"/>
+<polygon points="57.2,44.4 78,86 62,94 41.2,52.4"/>
+</g></g>
+<text x="110" y="158" text-anchor="middle" font-family="Montserrat, Arial, sans-serif" font-size="34" font-weight="800" font-style="italic" fill="#FFFFFF" letter-spacing="-0.5"><tspan>Apk</tspan><tspan dx="4">Nitro</tspan></text>
+</svg>

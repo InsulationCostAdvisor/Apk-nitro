@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+{{HEAD}}
+</head>
+<body>
+{{HEADER}}
+<main class="wrap">
+  <section class="s-hero">
+    <h1>Fast APKs. <em>Direct</em> downloads.</h1>
+    <p>10 Android APKs and mods in one place — direct downloads, no account needed.</p>
+    <form class="hero-search" action="/search/" method="get" role="search">
+      <input type="search" name="q" placeholder="Search for an app, game or mod…" aria-label="Search apps">
+      <button type="submit">Search</button>
+    </form>
+  </section>
+
+  <section class="s-sec" aria-labelledby="trending-h">
+    <h2 id="trending-h">Trending now</h2>
+    <p class="sub">Most downloaded this week</p>
+    <div class="chips" id="filter-chips">
+      <a href="/" class="on" data-filter="all">All</a>
+      <a href="/games/" data-filter="Games">Games</a>
+      <a href="/apps/" data-filter="Apps">Apps</a>
+      <a href="/mods/" data-filter="Mods">Mods</a>
+      <a href="/charts/" data-filter="editors">Top charts</a>
+    </div>
+    <div class="rows" id="trend-rows">{{ROWS_TRENDING}}</div>
+  </section>
+
+  <div class="ad">
+    <div class="lbl">Advertisement</div>
+    <div class="copy">Your ad could be here — clearly labelled, never next to a download button.</div>
+  </div>
+
+  <section class="s-sec" aria-labelledby="charts-h">
+    <h2 id="charts-h">Top charts</h2>
+    <p class="sub">Top free apps · this week</p>
+    <div class="rows" id="chart-rows">{{ROWS_CHARTS}}</div>
+  </section>
+</main>
+{{FOOTER}}
+{{SCRIPTS}}
+</body>
+</html>

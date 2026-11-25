@@ -1,0 +1,94 @@
+/* ApkNitro design tokens — the ONLY place hex colours may appear.
+   Three tiers: primitive -> semantic -> component.
+   Dark theme is a second palette, not an inversion. */
+
+:root {
+  /* --- primitives --- */
+  --p-red: #E10600;
+  --p-red-dark: #FF3B46;
+  --p-navy: #0B1B30;
+  --p-navy-2: #101828;
+  --p-navy-3: #16283F;
+  --p-navy-4: #22385C;
+  --p-navy-line: #2A3D5C;
+  --p-navy-line-2: #3A4E73;
+  --p-offwhite: #F7F8FA;
+  --p-white: #FFFFFF;
+  --p-nearblack: #0E1116;
+  --p-black: #111111;
+  --p-green: #16A34A;
+  --p-green-text: #15803D;
+  --p-green-light: #4ADE80;
+  --p-amber: #D97706;
+  --p-amber-text: #92400E;
+  --p-amber-light: #FBBF24;
+  --p-meta: #475569;
+  --p-meta-dark: #9AA7BD;
+  --p-line: #E3E7EE;
+  --p-line-2: #CBD3DE;
+  --p-line-dark: #26334A;
+  --p-ink-soft: #1A2233;
+  --p-ink-soft-2: #33415C;
+  --p-ink-soft-3: #5B6577;
+  --p-nav-text: #B9C4D6;
+  --p-nav-placeholder: #7C8AA5;
+  --p-hero-sub: #C7D0DE;
+  --p-grey-bg: #E9EDF2;
+  --p-shadow-red: rgba(225, 6, 0, 0.28);
+  --p-shadow-header: rgba(0, 0, 0, 0.18);
+  --p-shadow-bar: rgba(0, 0, 0, 0.12);
+  --p-scrim: rgba(0, 0, 0, 0.55);
+
+  /* --- semantic --- */
+  --red: var(--p-red);
+  --navy: var(--p-navy);
+  --bg: var(--p-offwhite);
+  --surface: var(--p-white);
+  --ink: var(--p-navy);
+  --meta: var(--p-meta);
+  --line: var(--p-line);
+  --green: var(--p-green-text);
+  --amber: var(--p-amber);
+  --amber-text: var(--p-amber-text);
+
+  /* --- component --- */
+  --btn-navy: var(--p-navy);
+  --btn-navy-hover: var(--p-navy-3);
+  --header-bg: var(--p-navy);
+  --header-text: var(--p-white);
+  --header-nav: var(--p-nav-text);
+  --header-input-bg: var(--p-navy-3);
+  --header-input-border: var(--p-navy-line);
+  --header-input-placeholder: var(--p-nav-placeholder);
+  --hero-sub: var(--p-hero-sub);
+  --hero-btn-bg: var(--p-white);
+  --hero-btn-text: var(--p-navy);
+  --chip-border: var(--line);
+  --star: var(--p-navy);
+  --trust-border: var(--green);
+  --ad-border: var(--p-line-2);
+  --shadow-primary: var(--p-shadow-red);
+  --shadow-header: var(--p-shadow-header);
+  --shadow-sticky: var(--p-shadow-bar);
+  --scrim: var(--p-scrim);
+
+  /* --- type --- */
+  --font-display: 'Montserrat', 'Arial', sans-serif;
+  --font-body: 'Inter', system-ui, sans-serif;
+  --font-mono: ui-monospace, Menlo, monospace;
+}
+
+[data-theme="dark"] {
+  --bg: var(--p-navy);
+  --surface: var(--p-navy-2);
+  --ink: var(--p-offwhite);
+  --meta: var(--p-meta-dark);
+  --line: var(--p-line-dark);
+  --green: var(--p-green-light);
+  --amber-text: var(--p-amber-light);
+  --red: var(--p-red-dark);
+  --btn-navy: var(--p-navy-4);
+  --btn-navy-hover: var(--p-navy-line-2);
+  --star: var(--p-offwhite);
+  --chip-border: var(--line);
+}
