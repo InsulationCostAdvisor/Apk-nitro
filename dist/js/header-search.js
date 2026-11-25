@@ -55,7 +55,20 @@ export function init() {
     var ic = document.createElement('span');
     ic.className = 'hs-ic';
     ic.style.backgroundColor = a.ic;
-    ic.textContent = a.ii;
+    if (a.ig) {
+      var im = document.createElement('img');
+      im.src = a.ig;
+      im.width = 512;
+      im.height = 512;
+      im.alt = '';
+      im.decoding = 'async';
+      im.onerror = function () { this.remove(); };
+      ic.appendChild(im);
+    }
+    var fb = document.createElement('span');
+    fb.setAttribute('aria-hidden', 'true');
+    fb.textContent = a.ii;
+    ic.appendChild(fb);
     var tx = document.createElement('span');
     tx.className = 'hs-tx';
     var nm = document.createElement('span');

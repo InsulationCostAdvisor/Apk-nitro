@@ -60,6 +60,25 @@ function stars(r) {
 }
 function tbd(v) { return v == null || v === '' || v === 'tbd' ? 'tbd' : v; }
 
+// Real app artwork: icons are 512x512 WebP in /assets/icons/, banners
+// are 2:1 WebP in /assets/banners/, wired via apps.json. Every tile keeps
+// its coloured background + initials behind the <img>; if the image file
+// is missing the img removes itself (onerror) and the old initials tile
+// shows. Icons/banners are decorative (the app name is adjacent text),
+// so alt is empty. Rows/carousel/grid images are below the fold, so
+// they load lazily; the app-page header icon is above the fold (eager).
+function iconImg(a, lazy) {
+  if (!a.icon) return '';
+  return `<img src="${esc(a.icon)}" width="512" height="512" alt="" decoding="async"${lazy ? ' loading="lazy"' : ''} onerror="this.remove()">`;
+}
+function bannerImg(a) {
+  if (!a.banner) return '';
+  return `<img src="${esc(a.banner)}" width="480" height="240" alt="" decoding="async" loading="lazy" onerror="this.remove()">`;
+}
+function tileInner(a, lazy) {
+  return iconImg(a, lazy) + `<span aria-hidden="true">${esc(a.icon_initials)}</span>`;
+}
+
 const LOGO_N = read(path.join(SRC, 'assets', 'logos', 'icon-red.svg'))
   .replace(/<svg /, '<svg width="26" height="26" ');
 const SEARCH_ICON = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><line x1="16.5" y1="16.5" x2="21" y2="21"/></svg>';
@@ -87,7 +106,7 @@ const DL_ICON = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stro
 // dropdown shows. `<` is escaped so the blob can never break out of its
 // <script type="application/json"> tag.
 const HS_DATA = '<script type="application/json" id="hs-data">'
-  + JSON.stringify(apps.map((a) => ({ n: a.name, s: a.slug, c: a.category, v: a.version, z: fmtSize(a.size_mb), ic: a.icon_colour, ii: a.icon_initials }))).replace(/</g, '\\u003c')
+  + JSON.stringify(apps.map((a) => ({ n: a.name, s: a.slug, c: a.category, v: a.version, z: fmtSize(a.size_mb), ic: a.icon_colour, ii: a.icon_initials, ig: a.icon || '' }))).replace(/</g, '\\u003c')
   + '</script>';
 
 function header(active) {
@@ -114,8 +133,8 @@ function header(active) {
 function carouselHTML(list) {
   const cards = list.map((a) =>
     `<article class="card"><a class="card-link" href="/apps/${esc(a.slug)}/">`
-    + `<div class="card-banner" style="background:${esc(a.icon_colour)}"><span class="card-big">${esc(a.icon_initials)}</span></div>`
-    + `<div class="card-strip"><div class="card-ic" style="background:${esc(a.icon_colour)}">${esc(a.icon_initials)}</div>`
+    + `<div class="card-banner" style="background:${esc(a.icon_colour)}">${bannerImg(a)}<span class="card-big">${esc(a.icon_initials)}</span></div>`
+    + `<div class="card-strip"><div class="card-ic" style="background:${esc(a.icon_colour)}">${tileInner(a, true)}</div>`
     + `<div class="card-tx"><div class="card-nm">${esc(a.name)}</div><div class="card-cat">${esc(a.category)}</div></div></div>`
     + `</a></article>`).join('');
   return `<section class="carousel" aria-labelledby="indispensable-h"><div class="carousel-head"><h2 id="indispensable-h"><span class="flame">${FLAME_ICON}</span>Indispensable on your phone</h2>`
@@ -128,7 +147,7 @@ function latestGridHTML(list) {
   // Catalogue only, apps.json order, no dates, no "NEW" badges.
   return list.map((a) =>
     `<a class="g-card" href="/apps/${esc(a.slug)}/">`
-    + `<div class="g-ic" style="background:${esc(a.icon_colour)}">${esc(a.icon_initials)}</div>`
+    + `<div class="g-ic" style="background:${esc(a.icon_colour)}">${tileInner(a, true)}</div>`
     + `<div class="g-nm">${esc(a.name)}</div>`
     + (a.rating === 'tbd' ? '' : `<div class="g-rt"><span class="st">★</span> ${esc(a.rating)}</div>`)
     + `</a>`).join('');
@@ -214,7 +233,7 @@ function rowHTML(a, opts) {
   // stays a separate sibling link — never nested links.
   return `<div class="row" data-name="${esc((a.name + ' ' + a.category + ' ' + (a.tags || []).join(' ')).toLowerCase())}" data-cat="${esc(a.category)}" data-mod="${a.signed_type === 'mod' ? '1' : '0'}">`
     + rank
-    + `<div class="ic" style="background:${esc(a.icon_colour)}">${esc(a.icon_initials)}</div>`
+    + `<div class="ic" style="background:${esc(a.icon_colour)}">${tileInner(a, true)}</div>`
     + `<a class="tx" href="/apps/${esc(a.slug)}/"><span class="nm">${esc(a.name)}</span>`
     + `<span class="mt"><span class="m1">v${esc(tbd(a.version))} · ${esc(size)}</span><span class="msep"> · </span><span class="m2">★ <b>${esc(rating)}</b>${cat}</span></span></a>`
     + `<a class="dl" href="/apps/${esc(a.slug)}/" aria-label="Download ${esc(a.name)}"><span class="dl-tx">Download</span>${DL_ICON}</a></div>`;
@@ -289,6 +308,7 @@ function appPage(a, allApps) {
     APP_NAME: esc(a.name + ' APK'),
     ICON_COLOUR: esc(a.icon_colour),
     ICON_INITIALS: esc(a.icon_initials),
+    ICON_IMG: iconImg(a, false),
     DEVELOPER: esc(tbd(a.developer)),
     CATEGORY: esc(a.category),
     VERSION: esc(tbd(a.version)),
@@ -318,6 +338,10 @@ function main() {
   for (const f of fs.readdirSync(path.join(SRC, 'assets', 'logos'))) fs.copyFileSync(path.join(SRC, 'assets', 'logos', f), path.join(DIST, 'assets', 'logos', f));
   fs.copyFileSync(path.join(SRC, 'assets', 'favicon.svg'), path.join(DIST, 'assets', 'favicon.svg'));
   fs.copyFileSync(path.join(SRC, 'assets', 'hero-bg.webp'), path.join(DIST, 'assets', 'hero-bg.webp'));
+  fs.mkdirSync(path.join(DIST, 'assets', 'icons'), { recursive: true });
+  for (const f of fs.readdirSync(path.join(SRC, 'assets', 'icons'))) fs.copyFileSync(path.join(SRC, 'assets', 'icons', f), path.join(DIST, 'assets', 'icons', f));
+  fs.mkdirSync(path.join(DIST, 'assets', 'banners'), { recursive: true });
+  for (const f of fs.readdirSync(path.join(SRC, 'assets', 'banners'))) fs.copyFileSync(path.join(SRC, 'assets', 'banners', f), path.join(DIST, 'assets', 'banners', f));
 
   const skipped = [];
   const pages = []; // [relPath, url] for sitemap
