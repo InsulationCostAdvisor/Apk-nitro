@@ -77,14 +77,6 @@ img, svg { display: block; }
 .s-hero .hero-search input::placeholder { color: var(--hero-input-placeholder); }
 .s-hero .hero-search button { border: 1px solid var(--hero-btn-border); border-radius: 9px; background: var(--hero-btn-bg); color: var(--hero-btn-text); font-weight: 700; font-size: 14px; padding: 0 20px; min-height: 44px; }
 .hero-cta { display: inline-flex; align-items: center; min-height: 44px; margin-top: 16px; background: var(--red); color: var(--p-white); font-weight: 700; font-size: 14px; padding: 12px 22px; border-radius: 9px; }
-/* Scroll hint (2026-11-25): small chevron + text anchored near the bottom of
-   the 100vh hero, so the empty space below Browse Apps reads as intentional.
-   Plain link to #trending, muted hero-sub colour, no button styling.
-   The sticky header (65px desktop) pushes the 100vh hero that far past the
-   viewport bottom, so the hint is lifted by the header height to sit 18px
-   above the fold instead of below it (mobile override: 61px, below). */
-.hero-scroll { position: absolute; left: 16px; bottom: calc(18px + 65px); z-index: 1; display: inline-flex; align-items: center; gap: 6px; min-height: 44px; color: var(--hero-sub); font-size: 12px; font-weight: 600; }
-.hero-scroll svg { width: 14px; height: 14px; }
 
 /* ---------- homepage carousel: "Indispensable on your phone" ---------- */
 /* Full-width: the track runs from the left gutter to the right edge —
@@ -294,8 +286,6 @@ img, svg { display: block; }
   .s-hero p.hero-intro { margin-top: 8px; font-size: 12px; }
   .s-hero .hero-search { margin-top: 8px; }
   .s-hero .hero-search input { padding: 10px 12px; }
-  /* Mobile header is 61px (desktop 65px) — see the .hero-scroll note above. */
-  .hero-scroll { bottom: calc(18px + 61px); }
   .hero-cta { margin-top: 12px; }
   .s-sec { padding: 12px 16px 6px; }
   .chips { padding: 2px 0 8px; }
@@ -363,7 +353,6 @@ html.theme-anim .s-hero::before,
 html.theme-anim .s-hero h1,
 html.theme-anim .s-hero h1 em,
 html.theme-anim .hero-cta,
-html.theme-anim .hero-scroll,
 html.theme-anim .rows,
 html.theme-anim .row,
 html.theme-anim .row .dl,
@@ -400,7 +389,6 @@ html.theme-anim .s-hero::before,
 html.theme-anim .s-hero h1,
 html.theme-anim .s-hero h1 em,
 html.theme-anim .hero-cta,
-html.theme-anim .hero-scroll,
   html.theme-anim .rows,
   html.theme-anim .row,
   html.theme-anim .row .dl,
