@@ -266,7 +266,13 @@ img, svg { display: block; }
      nav below it, so the hamburger stays on the first line and can
      close the menu. */
   .s-header .logo { order: 1; }
-  .h-actions { order: 2; }
+  /* Header icon spacing (2026-11-25 fix): on mobile the nav is
+     display:none, so its auto margins vanish and nothing pushed
+     .h-actions right — the icons bunched mid-bar, ending ~x=290 of 390
+     with ~100px dead space. margin-left:auto puts them flush right
+     with the 12px gutter; gap 8px evens the three 44px buttons
+     (was 2px, almost touching). Desktop untouched. */
+  .h-actions { order: 2; margin-left: auto; gap: 8px; }
   .s-header .nav.open { display: flex; flex-wrap: wrap; width: 100%; padding-top: 8px; margin: 0; gap: 2px; order: 3; }
   .s-header .nav.open a { flex: 1 1 40%; min-height: 44px; }
   .carousel-arrows { display: none; }
