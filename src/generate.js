@@ -272,9 +272,15 @@ function appPage(a, allApps) {
   const trustVariant = isMod
     ? '<br><span class="warn">Re-signed by uploader — scan result only.</span> This mod APK does not match the developer\u2019s original signature. Play Protect may warn on install — that is expected for a re-signed file.'
     : '<br><span class="warn">Not distributed on Google Play — scan result only.</span> This app is not on Google Play; check the scan result above once it exists before installing.';
+  const known = (v) => tbd(v) !== 'tbd';
+  const workParts = [];
+  if (known(a.mod_base_version)) workParts.push(`Built on ${esc(a.name.replace(/ Mod$/, ''))} v${esc(a.mod_base_version)}`);
+  if (known(a.mod_uploader)) workParts.push(`Uploaded by <b>${esc(a.mod_uploader)}</b>`);
+  if (known(a.mod_working_percent)) workParts.push(`<b>${esc(a.mod_working_percent)} working</b>`);
+  const workLine = workParts.length ? `<div class="work">${workParts.join(' · ')}</div>` : '';
   const modnotes = isMod ? `<div class="modnotes"><h2>What this mod changes</h2><ul>${
     (a.mod_changes || []).map((c) => `<li>${esc(c)}</li>`).join('')
-  }</ul><div class="work">Built on ${esc(a.name.replace(/ Mod$/, ''))} v${esc(tbd(a.mod_base_version))} · Uploaded by <b>${esc(tbd(a.mod_uploader))}</b> · <b>${esc(tbd(a.mod_working_percent))} working</b></div></div>` : '';
+  }</ul>${workLine}</div>` : '';
   const shots = (a.screenshots || []).map((label, i) =>
     `<div class="shot"><div class="big">${esc(a.icon_initials)}</div><div class="cap">Screenshot — ${esc(label)}</div></div>`).join('');
   const vers = (a.old_versions && a.old_versions.length)
