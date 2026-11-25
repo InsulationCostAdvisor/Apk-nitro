@@ -56,6 +56,12 @@
   /* --- component --- */
   --btn-navy: var(--p-navy);
   --btn-navy-hover: var(--p-navy-3);
+  /* Floating Back to top button: navy circle, white arrow. --btn-navy is
+     already overridden in dark mode (#22385C), so the button stays
+     visible on the dark navy page without a separate dark value. */
+  --to-top-bg: var(--btn-navy);
+  --to-top-bg-hover: var(--btn-navy-hover);
+  --to-top-text: var(--p-white);
   --header-bg: var(--p-navy);
   --header-text: var(--p-white);
   --header-bar-bg: var(--p-white);

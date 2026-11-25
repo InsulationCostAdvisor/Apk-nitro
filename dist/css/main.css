@@ -214,6 +214,22 @@ img, svg { display: block; }
 .sticky-dl .dl-sticky small { font-weight: 600; opacity: 0.85; font-size: 11.5px; }
 .sticky-dl .dl-sticky.disabled { opacity: 0.65; box-shadow: none; }
 
+/* ---------- floating Back to top button (proper pattern, 2026-11-25) ----------
+   Real <button>, bottom-right, hidden until one viewport is scrolled.
+   Hidden state uses visibility:hidden + opacity:0 so it leaves the tab
+   order and cannot be clicked. Flat — no shadow (debate fix #4: only
+   the primary download button and the header are shadowed). */
+.to-top { position: fixed; right: 16px; bottom: calc(16px + env(safe-area-inset-bottom, 0px)); z-index: 26; width: 48px; height: 48px; border-radius: 50%; border: 0; background: var(--to-top-bg); color: var(--to-top-text); display: flex; align-items: center; justify-content: center; opacity: 0; visibility: hidden; transform: translateY(8px); transition: opacity .25s ease, visibility 0s linear .25s, transform .25s ease, bottom .25s ease, background-color .25s ease; }
+.to-top svg { width: 20px; height: 20px; }
+.to-top.visible { opacity: .85; visibility: visible; transform: translateY(0); transition: opacity .25s ease, visibility 0s, transform .25s ease, bottom .25s ease, background-color .25s ease; }
+.to-top.visible:hover { opacity: 1; background: var(--to-top-bg-hover); }
+.to-top:focus-visible { outline: 2px solid var(--red); outline-offset: 2px; opacity: 1; }
+/* App pages: the sticky download bar is 65px tall (44px button + 10px +
+   10px padding + 1px border, measured from the .sticky-dl rules) and
+   the button must sit ABOVE it, never on it — but only while the bar is
+   actually shown (.above-bar is set by back-to-top.js). */
+.to-top.above-bar { bottom: calc(65px + 16px + env(safe-area-inset-bottom, 0px)); }
+
 /* ---------- trust strip (pending scan) ---------- */
 .trust.pending { border-left-color: var(--amber); }
 .trust.pending .t1 { color: var(--amber-text); }
@@ -271,6 +287,7 @@ img, svg { display: block; }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   .h-search-box { transition: none; }
+  .to-top { transition: none; }
 }
 
 /* ---------- theme-switch transition ---------- */
@@ -310,7 +327,8 @@ html.theme-anim .f-note,
 html.theme-anim .f-col h3,
 html.theme-anim .f-bar,
 html.theme-anim .sec-head a,
-html.theme-anim .h-search-results {
+html.theme-anim .h-search-results,
+html.theme-anim .to-top {
   transition: background-color .3s ease, color .3s ease, border-color .3s ease;
 }
 @media (prefers-reduced-motion: reduce) {
@@ -345,7 +363,8 @@ html.theme-anim .f-note,
 html.theme-anim .f-col h3,
 html.theme-anim .f-bar,
   html.theme-anim .sec-head a,
-  html.theme-anim .h-search-results {
+  html.theme-anim .h-search-results,
+  html.theme-anim .to-top {
     transition: none;
   }
 }

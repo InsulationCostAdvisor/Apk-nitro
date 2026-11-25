@@ -76,6 +76,7 @@ const NAV_ICONS = {
 };
 const CHEV_LEFT = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="15 5 8 12 15 19"/></svg>';
 const CHEV_RIGHT = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 5 16 12 9 19"/></svg>';
+const UP_ARROW = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 15 12 9 18 15"/></svg>';
 
 // Minimal app index for the header live search, embedded as JSON in every
 // page (no extra fetch, instant on first keystroke). Only the fields the
@@ -166,7 +167,8 @@ function footer() {
     </nav>
   </div>
   <div class="f-bar"><span>© 2026 ApkNitro</span><span>All APKs are linked from Google Drive — ApkNitro hosts no APK files.</span></div>
-</div></footer>`;
+</div></footer>
+<button type="button" class="to-top" aria-label="Back to top">${UP_ARROW}</button>`;
 }
 
 const THEME_SCRIPT = `<script>(function(){try{var t=localStorage.getItem('apknitro-theme');var d=t==='dark'?'dark':t==='light'?'light':(window.matchMedia&&matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',d);}catch(e){}})();</script>`;

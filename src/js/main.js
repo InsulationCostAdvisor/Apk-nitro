@@ -9,8 +9,9 @@ import { init as initNav } from './nav.js';
 import { init as initLazy } from './lazy.js';
 import { init as initCarousel } from './carousel.js';
 import { init as initHeaderSearch } from './header-search.js';
+import { init as initBackToTop } from './back-to-top.js';
 
-var modules = [initTheme, initSearch, initFilters, initSticky, initCopyHash, initNav, initLazy, initCarousel, initHeaderSearch];
+var modules = [initTheme, initSearch, initFilters, initSticky, initCopyHash, initNav, initLazy, initCarousel, initHeaderSearch, initBackToTop];
 modules.forEach(function (init) {
   try { init(); } catch (err) { /* one broken feature must not kill the rest */ }
 });
