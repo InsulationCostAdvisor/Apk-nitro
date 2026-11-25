@@ -68,6 +68,14 @@ const NAV_ICONS = {
 const CHEV_LEFT = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="15 5 8 12 15 19"/></svg>';
 const CHEV_RIGHT = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 5 16 12 9 19"/></svg>';
 
+// Minimal app index for the header live search, embedded as JSON in every
+// page (no extra fetch, instant on first keystroke). Only the fields the
+// dropdown shows. `<` is escaped so the blob can never break out of its
+// <script type="application/json"> tag.
+const HS_DATA = '<script type="application/json" id="hs-data">'
+  + JSON.stringify(apps.map((a) => ({ n: a.name, s: a.slug, c: a.category, v: a.version, z: fmtSize(a.size_mb), ic: a.icon_colour, ii: a.icon_initials }))).replace(/</g, '\\u003c')
+  + '</script>';
+
 function header(active) {
   const nav = [
     ['/', 'Home', 'home'], ['/apps/', 'Apps', 'apps'], ['/games/', 'Games', 'games'],
@@ -78,11 +86,15 @@ function header(active) {
   <a class="logo" href="/">${LOGO_N}<span>APKNITRO</span></a>
   <nav class="nav" aria-label="Main">${nav}</nav>
   <div class="h-actions">
-    <a class="icon-btn" href="/search/" aria-label="Search">${SEARCH_ICON}</a>
+    <div class="h-search" data-header-search>
+      <a class="icon-btn" href="/search/" aria-label="Search" aria-expanded="false" data-hs-toggle>${SEARCH_ICON}</a>
+      <div class="h-search-box"><input type="search" data-hs-input placeholder="Search apps…" aria-label="Search apps" autocomplete="off" autocapitalize="off" spellcheck="false" enterkeyhint="search" role="combobox" aria-expanded="false" aria-controls="hs-results" aria-autocomplete="list"></div>
+      <div class="h-search-results" id="hs-results" role="listbox" aria-label="Matching apps" hidden></div>
+    </div>
     <button class="icon-btn theme-btn" data-theme-toggle type="button" aria-label="Switch theme" data-icon="moon"><span class="ic-moon">${MOON_ICON}</span><span class="ic-sun">${SUN_ICON}</span></button>
     <button class="icon-btn nav-toggle" aria-expanded="false" aria-label="Menu">${MENU_ICON}</button>
   </div>
-</div></header>`;
+</div></header>${HS_DATA}`;
 }
 
 function carouselHTML(list) {
@@ -239,6 +251,7 @@ function main() {
   fs.mkdirSync(path.join(DIST, 'assets', 'logos'), { recursive: true });
   for (const f of fs.readdirSync(path.join(SRC, 'assets', 'logos'))) fs.copyFileSync(path.join(SRC, 'assets', 'logos', f), path.join(DIST, 'assets', 'logos', f));
   fs.copyFileSync(path.join(SRC, 'assets', 'favicon.svg'), path.join(DIST, 'assets', 'favicon.svg'));
+  fs.copyFileSync(path.join(SRC, 'assets', 'hero-phone.webp'), path.join(DIST, 'assets', 'hero-phone.webp'));
 
   const byDownloads = [...apps].sort((x, y) => parseDownloads(y.download_count) - parseDownloads(x.download_count));
   const skipped = [];

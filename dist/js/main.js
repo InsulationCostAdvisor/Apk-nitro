@@ -8,8 +8,9 @@ import { init as initCopyHash } from './copy-hash.js';
 import { init as initNav } from './nav.js';
 import { init as initLazy } from './lazy.js';
 import { init as initCarousel } from './carousel.js';
+import { init as initHeaderSearch } from './header-search.js';
 
-var modules = [initTheme, initSearch, initFilters, initSticky, initCopyHash, initNav, initLazy, initCarousel];
+var modules = [initTheme, initSearch, initFilters, initSticky, initCopyHash, initNav, initLazy, initCarousel, initHeaderSearch];
 modules.forEach(function (init) {
   try { init(); } catch (err) { /* one broken feature must not kill the rest */ }
 });

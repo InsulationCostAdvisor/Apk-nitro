@@ -32,8 +32,35 @@ img, svg { display: block; }
 .theme-btn[data-icon="sun"] .ic-sun { display: block; }
 .nav-toggle { display: none; }
 
+/* ---------- header search: expanding field + live results ---------- */
+/* The icon opens an inline field in the header — never a redirect (the
+   /search/ link is only the no-JS fallback). Below 1025px the field is a
+   full-width row under the header bar; on wide screens it expands inline
+   in the bar (see the 1025px query at the end). Results are a flat
+   bordered panel — no shadow, per debate fix 4. */
+.h-search { display: flex; align-items: center; }
+.h-search-box { position: absolute; top: 100%; left: 0; right: 0; background: var(--header-bar-bg); border-bottom: 1px solid var(--line); padding: 8px 12px; opacity: 0; visibility: hidden; transition: opacity .15s ease, visibility 0s linear .15s; }
+.h-search.open .h-search-box { opacity: 1; visibility: visible; transition: opacity .15s ease; }
+.h-search-box input { width: 100%; height: 40px; border: 1px solid var(--line); background: var(--bg); border-radius: 8px; padding: 0 12px; color: var(--ink); font-size: 14px; outline: 0; font-family: var(--font-body); }
+.h-search-box input::placeholder { color: var(--meta); }
+.h-search-box input:focus { border-color: var(--header-bar-nav); }
+.h-search-results { position: absolute; top: calc(100% + 57px); right: 12px; width: 320px; max-width: calc(100vw - 24px); max-height: 360px; overflow-y: auto; background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 4px; z-index: 40; }
+.hs-item { display: flex; align-items: center; gap: 10px; padding: 8px; border-radius: 8px; }
+.hs-item:hover, .hs-item.active { background: var(--bg); }
+.hs-ic { flex: 0 0 auto; width: 36px; height: 36px; border-radius: 8px; display: flex; align-items: center; justify-content: center; color: var(--header-text); font-weight: 700; font-size: 13px; }
+.hs-tx { min-width: 0; display: flex; flex-direction: column; }
+.hs-nm { font-size: 14px; font-weight: 600; color: var(--ink); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.hs-mt { font-size: 12px; color: var(--meta); margin-top: 1px; }
+.hs-none { padding: 12px; font-size: 13px; color: var(--meta); }
+
 /* ---------- hero — homepage only ---------- */
-.s-hero { background: var(--navy); color: var(--header-text); padding: 26px 16px 22px; }
+/* Split layout (2026-11-25, from the hero research note): text left, real
+   photo right. Flat look — 1px border, site radius, no gradients, no
+   glass, no shadows. The photo is a local WebP (src/assets/hero-phone.webp):
+   a real photograph of an Android phone showing app icons, not AI imagery. */
+.s-hero { background: var(--navy); color: var(--header-text); padding: 26px 16px 22px; display: flex; align-items: center; gap: 24px; }
+.hero-text { flex: 1; min-width: 0; }
+.hero-photo { flex: 0 0 360px; width: 360px; height: 220px; object-fit: cover; object-position: center 62%; border-radius: 12px; border: 1px solid var(--line); background: var(--p-navy-2); }
 .s-hero h1 { font-family: var(--font-display); font-weight: 900; font-style: italic; font-size: 30px; letter-spacing: -0.5px; line-height: 1.1; }
 .s-hero h1 em { color: var(--red); }
 .s-hero p { margin-top: 8px; font-size: 14px; color: var(--hero-sub); max-width: 520px; }
@@ -176,7 +203,12 @@ img, svg { display: block; }
   .s-header .nav.open a { flex: 1 1 40%; }
   .carousel-arrows { display: none; }
   .card { flex-basis: 200px; }
-  .s-hero { padding: 10px 16px; }
+  .s-hero { padding: 10px 16px; gap: 12px; }
+  .hero-text { flex: 1; min-width: 0; }
+  /* Mobile: the photo is a small cropped thumb beside the text — it adds
+     no height of its own (the text column stays the tall side), so the
+     hero stays compact and the catalogue is not pushed off-screen. */
+  .hero-photo { flex: 0 0 96px; width: 96px; height: 118px; object-position: center; border-radius: 10px; }
   .s-hero h1 { font-size: 21px; }
   .s-hero p { margin-top: 4px; font-size: 13px; }
   .s-hero .hero-search { margin-top: 8px; }
@@ -187,4 +219,18 @@ img, svg { display: block; }
 }
 @media (min-width: 641px) {
   .s-header .inner { flex-wrap: nowrap; }
+  .h-search-box { padding: 8px 16px; }
+  .h-search-results { right: 16px; }
+}
+
+/* ---------- header search on wide screens: field expands inline ---------- */
+@media (min-width: 1025px) {
+  .h-search { position: relative; }
+  .h-search-box { position: static; width: 0; padding: 0; border: 0; background: transparent; overflow: hidden; transition: width .18s ease, opacity .15s ease, visibility 0s linear .18s; }
+  .h-search.open .h-search-box { width: 248px; transition: width .18s ease, opacity .15s ease; }
+  .h-search-box input { width: 248px; height: 36px; }
+  .h-search-results { top: calc(100% + 12px); right: 0; width: 320px; max-width: calc(100vw - 32px); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .h-search-box { transition: none; }
 }

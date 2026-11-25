@@ -4,6 +4,13 @@ Standing rules for any agent working on this site. These come from the
 debated decisions in `apknitro-brand/BUILD-PLAN.md`; do not re-debate them
 in a task, follow them.
 
+## Redesign rule (user-stated 2026-11-25)
+Before starting ANY redesign, research how to do it the better way
+first — never ship generic AI-slop defaults. Research first, then
+build. Applies to every redesign (header, hero, carousel, etc.).
+The hero research in `research_notes/apknitro-hero-design.md` is the
+example of the right order.
+
 ## Stack
 - Static HTML generated from data. No framework, no build step on the host.
 - `src/data/apps.json` is the single source of truth. Edit it, run
@@ -45,7 +52,13 @@ in a task, follow them.
   Nitro Red #E10600 (#FF3B46 dark) — a deliberate exception to fix #2's
   one-red-element rule, which otherwise still holds. Do not "fix" the
   header back to navy or the active nav back to white.
-- Right side: search magnifier icon (links to /search/), theme icon
+- Right side: search magnifier icon opens an INLINE expanding field in
+  the header with live results from the 10 apps (name/category match,
+  dropdown updates as you type, debounced ~120ms; Escape / clicking
+  outside closes; arrow keys + Enter navigate results; Enter with text
+  goes to /search/?q=…). The /search/ link is only the no-JS fallback
+  and the full-search page. A header search button that just redirects
+  to the search page is bad UX — never go back to that. Theme icon
   button (moon in light mode, sun in dark mode; same System/Light/Dark
   cycle underneath), hamburger on mobile.
 - Homepage carousel: "Indispensable on your phone" sits directly under
@@ -77,6 +90,13 @@ in a task, follow them.
 6. Error body text #92400E on light (#FBBF24 on dark).
 7. Hero ONLY on the homepage: wordmark + ONE factual line + search.
    No hero on app pages.
+   Split layout (2026-11-25, research in
+   `research_notes/apknitro-hero-design.md`): text left, real photo
+   right on desktop; on mobile the photo is a small cropped thumb beside
+   the text and adds no height of its own. Photo is a local WebP
+   (`src/assets/hero-phone.webp`, real Unsplash photograph of an Android
+   phone showing app icons — never AI imagery, never hotlinked). Flat
+   look: 1px border, site radius, no gradients, no glass, no shadows.
 8. Mod pages have a mod-notes block (what the mod changes, base version,
    uploader, working %) — only where the data is real, else "tbd".
 9. Sticky bottom download bar in the thumb zone — the SAME button
