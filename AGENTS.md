@@ -26,6 +26,15 @@ in a task, follow them.
   `[data-theme="dark"]` block overriding the same tokens — a second
   palette, not an inversion.
 
+## Layout (full-width, 2026-11-25 — user instruction)
+- The site is FULL-WIDTH: no centred max-width container anywhere.
+  `.wrap` is `width: 100%`; every section (header, hero, catalogue,
+  carousel, app pages, footer) spans the viewport. The 16px side padding
+  on the sections is the gutter — nothing touches the screen edge. Do not
+  reintroduce a max-width column.
+- The carousel track runs from the left gutter to the right viewport edge
+  (only its heading/arrows keep the side gutter).
+
 ## Header (redesigned 2026-11-25 — LiteAPKs-style bar, ApkNitro branding)
 - White bar (near-black #0E1116 in dark), 1px bottom divider, flat — no
   shadow. Sticky at top. The navy hero band below it is unchanged.
@@ -43,6 +52,14 @@ in a task, follow them.
   the hero, above Trending now. Cards use each app's own icon colour
   with initials (placeholder panels, never fake screenshots); category
   is red, not green. First card is a labelled Advertisement placeholder.
+- Carousel AUTO-SCROLLS (2026-11-25, user instruction — overrides any
+  earlier no-autoplay note): one card every ~3s on a seamless loop via
+  a duplicated card set. Pauses on hover, while dragging, while focus
+  is inside, and while the tab is hidden; any manual swipe/arrow/drag
+  pauses it for 4s, then it resumes. Never auto-scrolls with
+  prefers-reduced-motion. No visible scrollbar under the carousel
+  (scrollbar-width: none + ::-webkit-scrollbar hidden) — swipe and
+  arrows still work.
 
 ## The 11 debate fixes (all must hold on every page)
 1. Trust strip in the first viewport under the download button, honest
