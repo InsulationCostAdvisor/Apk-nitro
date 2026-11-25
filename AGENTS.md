@@ -26,6 +26,24 @@ in a task, follow them.
   `[data-theme="dark"]` block overriding the same tokens — a second
   palette, not an inversion.
 
+## Header (redesigned 2026-11-25 — LiteAPKs-style bar, ApkNitro branding)
+- White bar (near-black #0E1116 in dark), 1px bottom divider, flat — no
+  shadow. Sticky at top. The navy hero band below it is unchanged.
+- Logo lockup: red leaning-N icon + "APKNITRO" wordmark in Midnight Navy
+  (off-white in dark). Never ".com", never a red wordmark.
+- Nav: Home, Apps, Games, Mods, Top Charts, each with a small icon.
+  Inactive nav is metadata #475569 (#9AA7BD dark); the ACTIVE page is
+  Nitro Red #E10600 (#FF3B46 dark) — a deliberate exception to fix #2's
+  one-red-element rule, which otherwise still holds. Do not "fix" the
+  header back to navy or the active nav back to white.
+- Right side: search magnifier icon (links to /search/), theme icon
+  button (moon in light mode, sun in dark mode; same System/Light/Dark
+  cycle underneath), hamburger on mobile.
+- Homepage carousel: "Indispensable on your phone" sits directly under
+  the hero, above Trending now. Cards use each app's own icon colour
+  with initials (placeholder panels, never fake screenshots); category
+  is red, not green. First card is a labelled Advertisement placeholder.
+
 ## The 11 debate fixes (all must hold on every page)
 1. Trust strip in the first viewport under the download button, honest
    variant only: Play-signed "Matches developer signature"; mod

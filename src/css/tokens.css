@@ -56,7 +56,9 @@
   --btn-navy-hover: var(--p-navy-3);
   --header-bg: var(--p-navy);
   --header-text: var(--p-white);
-  --header-nav: var(--p-nav-text);
+  --header-bar-bg: var(--p-white);
+  --header-bar-text: var(--p-navy);
+  --header-bar-nav: var(--p-meta);
   --header-input-bg: var(--p-navy-3);
   --header-input-border: var(--p-navy-line);
   --header-input-placeholder: var(--p-nav-placeholder);
@@ -64,6 +66,7 @@
   --hero-btn-bg: var(--p-white);
   --hero-btn-text: var(--p-navy);
   --chip-border: var(--line);
+  --card-strip: var(--p-offwhite);
   --star: var(--p-navy);
   --trust-border: var(--green);
   --ad-border: var(--p-line-2);
@@ -89,6 +92,10 @@
   --red: var(--p-red-dark);
   --btn-navy: var(--p-navy-4);
   --btn-navy-hover: var(--p-navy-line-2);
+  --header-bar-bg: var(--p-nearblack);
+  --header-bar-text: var(--p-offwhite);
+  --header-bar-nav: var(--p-meta-dark);
+  --card-strip: var(--p-navy-2);
   --star: var(--p-offwhite);
   --chip-border: var(--line);
 }

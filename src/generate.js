@@ -54,19 +54,48 @@ function tbd(v) { return v == null || v === '' || v === 'tbd' ? 'tbd' : v; }
 const LOGO_N = read(path.join(SRC, 'assets', 'logos', 'icon-red.svg'))
   .replace(/<svg /, '<svg width="26" height="26" ');
 const SEARCH_ICON = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><line x1="16.5" y1="16.5" x2="21" y2="21"/></svg>';
+const SUN_ICON = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4.5"/><line x1="12" y1="2.5" x2="12" y2="5"/><line x1="12" y1="19" x2="12" y2="21.5"/><line x1="2.5" y1="12" x2="5" y2="12"/><line x1="19" y1="12" x2="21.5" y2="12"/><line x1="5" y1="5" x2="6.8" y2="6.8"/><line x1="17.2" y1="17.2" x2="19" y2="19"/><line x1="19" y1="5" x2="17.2" y2="6.8"/><line x1="6.8" y1="17.2" x2="5" y2="19"/></svg>';
+const MOON_ICON = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.5 14.5A8.5 8.5 0 0 1 9.5 3.5a8.5 8.5 0 1 0 11 11Z"/></svg>';
+const MENU_ICON = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><line x1="4" y1="7" x2="20" y2="7"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="17" x2="20" y2="17"/></svg>';
+const FLAME_ICON = '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.5c.8 3.2 3.8 5.4 5.5 8.2 1.2 2 1.8 3.6 1.8 5.3a7.3 7.3 0 1 1-14.6 0c0-2.4 1.2-4.3 2.6-5.8.4 1.4 1.1 2.4 2.2 3-.6-3.4.3-7.3 2.5-10.7Z"/></svg>';
+const NAV_ICONS = {
+  home: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 10.5 12 3l9 7.5"/><path d="M5 9.5V21h14V9.5"/><path d="M9.5 21v-6h5v6"/></svg>',
+  apps: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><rect x="3.5" y="3.5" width="7" height="7" rx="1.5"/><rect x="13.5" y="3.5" width="7" height="7" rx="1.5"/><rect x="3.5" y="13.5" width="7" height="7" rx="1.5"/><rect x="13.5" y="13.5" width="7" height="7" rx="1.5"/></svg>',
+  games: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 8h10a5 5 0 0 1 5 5v2a3 3 0 0 1-5.4 1.8L15.5 15h-7l-1.1 1.8A3 3 0 0 1 2 15v-2a5 5 0 0 1 5-5Z"/><path d="M8 11v3M6.5 12.5h3"/><circle cx="16.2" cy="11.4" r=".7" fill="currentColor" stroke="none"/><circle cx="18.2" cy="13.4" r=".7" fill="currentColor" stroke="none"/></svg>',
+  mods: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>',
+  charts: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><line x1="5" y1="20" x2="5" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="19" y1="20" x2="19" y2="14"/></svg>',
+};
+const CHEV_LEFT = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="15 5 8 12 15 19"/></svg>';
+const CHEV_RIGHT = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 5 16 12 9 19"/></svg>';
 
 function header(active) {
   const nav = [
-    ['/apps/', 'Apps'], ['/games/', 'Games'], ['/mods/', 'Mods'], ['/charts/', 'Top charts'],
-  ].map(([href, label]) =>
-    `<a href="${href}"${active === href ? ' aria-current="page"' : ''}>${label}</a>`).join('');
+    ['/', 'Home', 'home'], ['/apps/', 'Apps', 'apps'], ['/games/', 'Games', 'games'],
+    ['/mods/', 'Mods', 'mods'], ['/charts/', 'Top charts', 'charts'],
+  ].map(([href, label, icon]) =>
+    `<a href="${href}"${active === href ? ' aria-current="page"' : ''}>${NAV_ICONS[icon]}${label}</a>`).join('');
   return `<header class="s-header"><div class="inner wrap">
-  <a class="logo" href="/">${LOGO_N}Apk<span class="n2">Nitro</span></a>
-  <button class="nav-toggle" aria-expanded="false" aria-label="Menu">Menu</button>
+  <a class="logo" href="/">${LOGO_N}<span>APKNITRO</span></a>
   <nav class="nav" aria-label="Main">${nav}</nav>
-  <form class="search" action="/search/" method="get" role="search">${SEARCH_ICON}<input type="search" name="q" placeholder="Search apps…" aria-label="Search apps"></form>
-  <button class="theme-btn" data-theme-toggle type="button">Theme: System</button>
+  <div class="h-actions">
+    <a class="icon-btn" href="/search/" aria-label="Search">${SEARCH_ICON}</a>
+    <button class="icon-btn theme-btn" data-theme-toggle type="button" aria-label="Switch theme" data-icon="moon"><span class="ic-moon">${MOON_ICON}</span><span class="ic-sun">${SUN_ICON}</span></button>
+    <button class="icon-btn nav-toggle" aria-expanded="false" aria-label="Menu">${MENU_ICON}</button>
+  </div>
 </div></header>`;
+}
+
+function carouselHTML(list) {
+  const ad = `<article class="card ad-card" aria-label="Advertisement placeholder"><div class="card-banner ad-banner"><span>Advertisement</span></div><div class="card-strip"><div class="card-ic ad-ic">Ad</div><div class="card-tx"><div class="card-nm">Your ad here</div><div class="card-cat ad-cat">Advertisement</div></div></div></article>`;
+  const cards = list.map((a) =>
+    `<article class="card"><a class="card-link" href="/apps/${esc(a.slug)}/">`
+    + `<div class="card-banner" style="background:${esc(a.icon_colour)}"><span class="card-big">${esc(a.icon_initials)}</span></div>`
+    + `<div class="card-strip"><div class="card-ic" style="background:${esc(a.icon_colour)}">${esc(a.icon_initials)}</div>`
+    + `<div class="card-tx"><div class="card-nm">${esc(a.name)}</div><div class="card-cat">${esc(a.category)}</div></div></div>`
+    + `</a></article>`).join('');
+  return `<section class="carousel" aria-labelledby="indispensable-h"><div class="carousel-head"><h2 id="indispensable-h"><span class="flame">${FLAME_ICON}</span>Indispensable on your phone</h2>`
+    + `<div class="carousel-arrows"><button type="button" class="car-arrow" data-car-prev aria-label="Previous apps">${CHEV_LEFT}</button><button type="button" class="car-arrow" data-car-next aria-label="Next apps">${CHEV_RIGHT}</button></div></div>`
+    + `<div class="carousel-track" data-carousel>${ad}${cards}</div></section>`;
 }
 
 function footer() {
@@ -225,9 +254,10 @@ function main() {
       ogImage: SITE_URL + '/assets/logos/icon-red.svg',
       jsonLd: null,
     }),
-    HEADER: header(''),
+    HEADER: header('/'),
     FOOTER: footer(),
     SCRIPTS,
+    CAROUSEL: carouselHTML(apps),
     ROWS_TRENDING: byDownloads.slice(0, 8).map(rowHTML).join(''),
     ROWS_CHARTS: byDownloads.slice(2, 8).map(rowHTML).join(''),
   }));
