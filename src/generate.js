@@ -144,13 +144,19 @@ ${THEME_SCRIPT}
 ${jsonLd ? `<script type="application/ld+json">\n${jsonLd}\n</script>` : ''}`;
 }
 
-function rowHTML(a) {
+function rowHTML(a, opts) {
   const size = fmtSize(a.size_mb);
   const rating = a.rating === 'tbd' ? 'tbd' : a.rating;
+  // Trending rows only: big rank number (top 3 in red) and the category
+  // in the meta line. Every other caller omits opts and gets the plain row.
+  const rank = opts && opts.rank != null
+    ? `<span class="rank${opts.rank <= 3 ? ' top' : ''}" aria-hidden="true">${opts.rank}</span>` : '';
+  const cat = opts && opts.category ? ` · ${esc(a.category)}` : '';
   return `<div class="row" data-name="${esc((a.name + ' ' + a.category + ' ' + (a.tags || []).join(' ')).toLowerCase())}" data-cat="${esc(a.category)}" data-mod="${a.signed_type === 'mod' ? '1' : '0'}">`
+    + rank
     + `<div class="ic" style="background:${esc(a.icon_colour)}">${esc(a.icon_initials)}</div>`
     + `<div class="tx"><div class="nm"><a href="/apps/${esc(a.slug)}/">${esc(a.name)}</a></div>`
-    + `<div class="mt">v${esc(tbd(a.version))} · ${esc(size)} · ★ <b>${esc(rating)}</b></div></div>`
+    + `<div class="mt">v${esc(tbd(a.version))} · ${esc(size)} · ★ <b>${esc(rating)}</b>${cat}</div></div>`
     + `<a class="dl" href="/apps/${esc(a.slug)}/">Download</a></div>`;
 }
 
@@ -271,7 +277,7 @@ function main() {
     FOOTER: footer(),
     SCRIPTS,
     CAROUSEL: carouselHTML(apps),
-    ROWS_TRENDING: byDownloads.slice(0, 8).map(rowHTML).join(''),
+    ROWS_TRENDING: byDownloads.slice(0, 8).map((a, i) => rowHTML(a, { rank: i + 1, category: true })).join(''),
     ROWS_CHARTS: byDownloads.slice(2, 8).map(rowHTML).join(''),
   }));
   pages.push(['index.html', SITE_URL + '/']);
