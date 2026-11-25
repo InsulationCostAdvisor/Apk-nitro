@@ -263,7 +263,7 @@ function appPage(a, allApps) {
       `<div class="ver"><div><div class="v">${esc(v.version)}</div><div class="m">${i === 0 ? 'Latest · ' : ''}${esc(v.date)} · ${esc(fmtSize(v.size_mb))}</div></div>`
       + (a.download_url !== 'tbd'
         ? `<a class="vd" href="${esc(a.download_url)}">Download</a>`
-        : `<span class="vd disabled">Download</span>`)).join('')
+        : `<span class="vd disabled">Download</span>`) + `</div>`).join('')
     : '<p class="empty">No older versions listed yet.</p>';
   const similar = allApps.filter((x) => x.slug !== a.slug && x.category === a.category).slice(0, 3);
   const similarList = similar.length ? similar : allApps.filter((x) => x.slug !== a.slug).slice(0, 3);
