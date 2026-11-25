@@ -16,6 +16,9 @@ const SITE_URL = 'https://apknitro.com';
 
 const data = JSON.parse(fs.readFileSync(path.join(SRC, 'data', 'apps.json'), 'utf8'));
 const apps = data.apps;
+// Trending order, shared by the homepage rows and the footer Top apps
+// column — computed once, deterministic.
+const byDownloads = [...apps].sort((x, y) => parseDownloads(y.download_count) - parseDownloads(x.download_count));
 
 function esc(s) {
   return String(s == null ? '' : s)
@@ -82,7 +85,7 @@ function header(active) {
     ['/mods/', 'Mods', 'mods'], ['/charts/', 'Top charts', 'charts'],
   ].map(([href, label, icon]) =>
     `<a href="${href}"${active === href ? ' aria-current="page"' : ''}>${NAV_ICONS[icon]}${label}</a>`).join('');
-  return `<header class="s-header"><div class="inner wrap">
+  return `<header class="s-header" id="top"><div class="inner wrap">
   <a class="logo" href="/">${LOGO_N}<span>APKNITRO</span></a>
   <nav class="nav" aria-label="Main">${nav}</nav>
   <div class="h-actions">
@@ -122,10 +125,42 @@ function latestGridHTML(list) {
 }
 
 function footer() {
+  // Brand column uses the official lockup, exactly as the header does:
+  // the real leaning-N icon SVG + "APKNITRO" in Montserrat ExtraBold
+  // Italic (off-white on navy). Never plain bold text, never a redrawn N.
+  // Top apps = top 5 in the existing Trending order, generated from data.
+  const top5 = byDownloads.slice(0, 5).map((a) =>
+    `<li><a href="/apps/${esc(a.slug)}/">${esc(a.name)}</a></li>`).join('');
   return `<footer class="s-foot"><div class="wrap">
-  <b>ApkNitro</b> — fast APK downloads.<br>
-  <a href="/apps/">All apps</a> · <a href="/games/">Games</a> · <a href="/mods/">Mods</a> · <a href="/charts/">Top charts</a> · <a href="/sitemap.xml">Sitemap</a><br>
-  Scan status is shown on every app page. Files are linked from Google Drive; no APK file is hosted here.
+  <div class="f-cols">
+    <div class="f-col f-brand">
+      <a class="f-logo" href="/">${LOGO_N}<span>APKNITRO</span></a>
+      <p class="f-tag">Fast APKs. Direct downloads.</p>
+      <p class="f-note">Scan status is shown on every app page. Files are linked from Google Drive; no APK file is hosted here.</p>
+    </div>
+    <nav class="f-col" aria-label="Browse">
+      <h3>Browse</h3>
+      <ul>
+        <li><a href="/apps/">All apps</a></li>
+        <li><a href="/games/">Games</a></li>
+        <li><a href="/mods/">Mods</a></li>
+        <li><a href="/charts/">Top charts</a></li>
+        <li><a href="/search/">Search</a></li>
+      </ul>
+    </nav>
+    <nav class="f-col" aria-label="Top apps">
+      <h3>Top apps</h3>
+      <ul>${top5}</ul>
+    </nav>
+    <nav class="f-col" aria-label="Site">
+      <h3>Site</h3>
+      <ul>
+        <li><a href="/sitemap.xml">Sitemap</a></li>
+        <li><a href="#top">Back to top</a></li>
+      </ul>
+    </nav>
+  </div>
+  <div class="f-bar"><span>© 2026 ApkNitro</span><span>All APKs are linked from Google Drive — ApkNitro hosts no APK files.</span></div>
 </div></footer>`;
 }
 
@@ -270,7 +305,6 @@ function main() {
   fs.copyFileSync(path.join(SRC, 'assets', 'favicon.svg'), path.join(DIST, 'assets', 'favicon.svg'));
   fs.copyFileSync(path.join(SRC, 'assets', 'hero-bg.webp'), path.join(DIST, 'assets', 'hero-bg.webp'));
 
-  const byDownloads = [...apps].sort((x, y) => parseDownloads(y.download_count) - parseDownloads(x.download_count));
   const skipped = [];
   const pages = []; // [relPath, url] for sitemap
 

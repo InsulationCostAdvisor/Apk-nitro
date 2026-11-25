@@ -69,6 +69,11 @@
   --hero-overlay: var(--p-hero-overlay);
   --chip-border: var(--line);
   --chip-on-bg: var(--navy);
+  --foot-bg: var(--p-navy);
+  --foot-text: var(--p-offwhite);
+  --foot-heading: var(--p-white);
+  --foot-link: var(--p-nav-text);
+  --foot-line: var(--p-navy-line);
   --card-strip: var(--p-offwhite);
   --star: var(--p-navy);
   --trust-border: var(--green);
