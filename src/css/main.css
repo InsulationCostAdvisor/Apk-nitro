@@ -59,33 +59,32 @@ img, svg { display: block; }
 .hs-none { padding: 12px; font-size: 13px; color: var(--meta); }
 
 /* ---------- hero — homepage only ---------- */
-/* COMPACT search-first band (2026-11-25, user-chosen redesign — replaces
-   the 100vh hero). Height is set by the content, not the viewport, so
-   the carousel and Trending are nearly visible on phones. Full-bleed
-   background image hero-bg.webp (user-approved, brand palette —
-   navy/red/white, six realistic app icons, no letter, no text) with a
-   solid uniform overlay for readability — no gradient, no glass, no
-   shadows. Content: headline + one factual line + search + category
-   chips. No paragraph (it duplicated the subline) and no "Browse Apps"
-   CTA (redundant now the hero is short). Same image and overlay in
-   both themes. */
-.s-hero { position: relative; background: var(--hero-bg) url(/assets/hero-bg.webp) right center / cover no-repeat; color: var(--hero-text); padding: 28px 16px 30px; }
+/* Full-bleed background image (2026-11-25, user-approved): hero-bg.webp
+   covers the whole hero, 100vh tall (100svh where supported). Flat look —
+   a solid uniform navy overlay keeps the text readable, no gradient, no
+   glass, no shadows except the primary button. The image is generated in
+   the brand palette (navy/red/white, six realistic app icons, no letter,
+   no text in the image). Same image and overlay in both themes. */
+.s-hero { position: relative; min-height: 100vh; min-height: 100svh; background: var(--hero-bg) url(/assets/hero-bg.webp) right center / cover no-repeat; color: var(--hero-text); padding: 26px 16px; display: flex; align-items: center; }
 .s-hero::before { content: ""; position: absolute; inset: 0; background: var(--hero-overlay); }
-.hero-text { position: relative; z-index: 1; }
+.hero-text { position: relative; z-index: 1; flex: 1; min-width: 0; }
 .s-hero h1 { font-family: var(--font-display); font-weight: 900; font-style: italic; font-size: 30px; letter-spacing: -0.5px; line-height: 1.1; }
 .s-hero h1 em { color: var(--red); }
 .s-hero p { margin-top: 8px; font-size: 14px; color: var(--hero-sub); max-width: 520px; }
+.s-hero p.hero-intro { margin-top: 10px; font-size: 13px; line-height: 1.55; color: var(--hero-sub); max-width: 560px; }
 .s-hero .hero-search { margin-top: 16px; display: flex; gap: 8px; max-width: 520px; }
 .s-hero .hero-search input { flex: 1; min-width: 0; border: 1px solid var(--hero-input-border); background: var(--hero-input-bg); border-radius: 9px; padding: 12px 14px; min-height: 44px; color: var(--hero-input-text); font-size: 16px; outline: 0; font-family: var(--font-body); }
 .s-hero .hero-search input::placeholder { color: var(--hero-input-placeholder); }
 .s-hero .hero-search button { border: 1px solid var(--hero-btn-border); border-radius: 9px; background: var(--hero-btn-bg); color: var(--hero-btn-text); font-weight: 700; font-size: 14px; padding: 0 20px; min-height: 44px; }
-/* Category chips under the search (2026-11-25 compact hero): real links
-   to the four category pages. Solid white pills with navy text in both
-   themes (see --hero-chip-* tokens) — white on the navy overlay in
-   dark, and the navy border defines them on the pale wash in light. */
-.hero-chips { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 16px; }
-.hero-chips a { display: inline-flex; align-items: center; justify-content: center; min-height: 44px; padding: 0 16px; border-radius: 999px; border: 1px solid var(--hero-chip-border); background: var(--hero-chip-bg); color: var(--hero-chip-text); font-weight: 700; font-size: 13px; }
-.hero-chips a:hover { background: var(--hero-chip-bg-hover); }
+.hero-cta { display: inline-flex; align-items: center; min-height: 44px; margin-top: 16px; background: var(--red); color: var(--p-white); font-weight: 700; font-size: 14px; padding: 12px 22px; border-radius: 9px; }
+/* Scroll hint (2026-11-25): small chevron + text anchored near the bottom of
+   the 100vh hero, so the empty space below Browse Apps reads as intentional.
+   Plain link to #trending, muted hero-sub colour, no button styling.
+   The sticky header (65px desktop) pushes the 100vh hero that far past the
+   viewport bottom, so the hint is lifted by the header height to sit 18px
+   above the fold instead of below it (mobile override: 61px, below). */
+.hero-scroll { position: absolute; left: 16px; bottom: calc(18px + 65px); z-index: 1; display: inline-flex; align-items: center; gap: 6px; min-height: 44px; color: var(--hero-sub); font-size: 12px; font-weight: 600; }
+.hero-scroll svg { width: 14px; height: 14px; }
 
 /* ---------- homepage carousel: "Indispensable on your phone" ---------- */
 /* Full-width: the track runs from the left gutter to the right edge —
@@ -286,15 +285,18 @@ img, svg { display: block; }
   .s-header .nav.open a { flex: 1 1 40%; min-height: 44px; }
   .carousel-arrows { display: none; }
   .card { flex-basis: 200px; }
-  /* Compact hero on mobile (2026-11-25 redesign): height is set by the
-     content — no 100vh. Background shifted so the icons stay visible
-     on the right and the text stays readable over the overlay. */
-  .s-hero { padding: 20px 16px 22px; background-position: 72% center; }
+  /* Mobile hero is 100vh (user instruction 2026-11-25) — the catalogue
+     sits below the fold on phones. Background shifted so the icons stay
+     visible on the right and the text stays readable over the overlay. */
+  .s-hero { padding: 10px 16px; background-position: 72% center; }
   .s-hero h1 { font-size: 21px; }
-  .s-hero p { margin-top: 6px; font-size: 13px; }
-  .s-hero .hero-search { margin-top: 12px; }
+  .s-hero p { margin-top: 4px; font-size: 13px; }
+  .s-hero p.hero-intro { margin-top: 8px; font-size: 12px; }
+  .s-hero .hero-search { margin-top: 8px; }
   .s-hero .hero-search input { padding: 10px 12px; }
-  .hero-chips { margin-top: 12px; }
+  /* Mobile header is 61px (desktop 65px) — see the .hero-scroll note above. */
+  .hero-scroll { bottom: calc(18px + 61px); }
+  .hero-cta { margin-top: 12px; }
   .s-sec { padding: 12px 16px 6px; }
   .chips { padding: 2px 0 8px; }
   .app-grid { grid-template-columns: repeat(3, 1fr); gap: 14px 10px; }
@@ -360,6 +362,8 @@ html.theme-anim .s-hero .hero-search button,
 html.theme-anim .s-hero::before,
 html.theme-anim .s-hero h1,
 html.theme-anim .s-hero h1 em,
+html.theme-anim .hero-cta,
+html.theme-anim .hero-scroll,
 html.theme-anim .rows,
 html.theme-anim .row,
 html.theme-anim .row .dl,
@@ -395,6 +399,8 @@ html.theme-anim .to-top {
 html.theme-anim .s-hero::before,
 html.theme-anim .s-hero h1,
 html.theme-anim .s-hero h1 em,
+html.theme-anim .hero-cta,
+html.theme-anim .hero-scroll,
   html.theme-anim .rows,
   html.theme-anim .row,
   html.theme-anim .row .dl,
