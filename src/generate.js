@@ -107,7 +107,6 @@ function header(active) {
 }
 
 function carouselHTML(list) {
-  const ad = `<article class="card ad-card" aria-label="Advertisement placeholder"><div class="card-banner ad-banner"><span>Advertisement</span></div><div class="card-strip"><div class="card-ic ad-ic">Ad</div><div class="card-tx"><div class="card-nm">Your ad here</div><div class="card-cat ad-cat">Advertisement</div></div></div></article>`;
   const cards = list.map((a) =>
     `<article class="card"><a class="card-link" href="/apps/${esc(a.slug)}/">`
     + `<div class="card-banner" style="background:${esc(a.icon_colour)}"><span class="card-big">${esc(a.icon_initials)}</span></div>`
@@ -116,7 +115,7 @@ function carouselHTML(list) {
     + `</a></article>`).join('');
   return `<section class="carousel" aria-labelledby="indispensable-h"><div class="carousel-head"><h2 id="indispensable-h"><span class="flame">${FLAME_ICON}</span>Indispensable on your phone</h2>`
     + `<div class="carousel-arrows"><button type="button" class="car-arrow" data-car-prev aria-label="Previous apps">${CHEV_LEFT}</button><button type="button" class="car-arrow" data-car-next aria-label="Next apps">${CHEV_RIGHT}</button></div></div>`
-    + `<div class="carousel-track" data-carousel>${ad}${cards}</div></section>`;
+    + `<div class="carousel-track" data-carousel>${cards}</div></section>`;
 }
 
 function latestGridHTML(list) {
