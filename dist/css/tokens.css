@@ -81,6 +81,14 @@
   --hero-btn-bg: var(--p-white);
   --hero-btn-text: var(--p-navy);
   --hero-btn-border: var(--p-navy);
+  /* Hero category chips: solid white pills with navy text in BOTH
+     themes — white on the navy overlay (dark) and, with the navy
+     border, on the pale wash (light). Same values in dark mode, so no
+     override in the [data-theme="dark"] block below. */
+  --hero-chip-bg: var(--p-white);
+  --hero-chip-text: var(--p-navy);
+  --hero-chip-border: var(--p-navy);
+  --hero-chip-bg-hover: var(--p-offwhite);
   --chip-border: var(--line);
   --chip-on-bg: var(--navy);
   /* Footer: LIGHT mode is an off-white block with navy text (2026-11-25:
