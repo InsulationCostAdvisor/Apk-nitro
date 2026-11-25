@@ -28,12 +28,19 @@ export function init() {
   var current = stored === 'light' || stored === 'dark' ? stored : 'system';
   apply(current);
   if (mq && mq.addEventListener) mq.addEventListener('change', function () { apply(current); });
+  var animTimer = null;
   btn.addEventListener('click', function () {
     current = current === 'system' ? 'light' : current === 'light' ? 'dark' : 'system';
     try {
       if (current === 'system') localStorage.removeItem(KEY);
       else localStorage.setItem(KEY, current);
     } catch (e) { /* storage unavailable */ }
+    // Smooth cross-fade, only for this user-initiated switch: the class
+    // enables the CSS transition, then is removed after the fade. The
+    // first page load never gets the class, so it never fades in.
+    root.classList.add('theme-anim');
+    if (animTimer) clearTimeout(animTimer);
+    animTimer = setTimeout(function () { root.classList.remove('theme-anim'); }, 350);
     apply(current);
   });
 }

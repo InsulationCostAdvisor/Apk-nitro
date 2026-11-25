@@ -19,6 +19,12 @@ const apps = data.apps;
 // Trending order, shared by the homepage rows and the footer Top apps
 // column — computed once, deterministic.
 const byDownloads = [...apps].sort((x, y) => parseDownloads(y.download_count) - parseDownloads(x.download_count));
+// Top charts order, shared by the homepage Top charts section and the
+// /charts/ page — computed once, deterministic. The homepage section
+// shows the first 6; the /charts/ page shows all 10 in this same order
+// (first 6 identical, then the remaining apps in download order).
+const topCharts = byDownloads.slice(2, 8);
+const chartsPageOrder = [...topCharts, ...byDownloads.filter((a) => !topCharts.includes(a))];
 
 function esc(s) {
   return String(s == null ? '' : s)
@@ -324,7 +330,7 @@ function main() {
     CAROUSEL: carouselHTML(apps),
     ROWS_TRENDING: byDownloads.slice(0, 8).map((a, i) => rowHTML(a, { rank: i + 1, category: true })).join(''),
     GRID_LATEST: latestGridHTML(apps),
-    ROWS_CHARTS: byDownloads.slice(2, 8).map((a, i) => rowHTML(a, { rank: i + 1, category: true })).join(''),
+    ROWS_CHARTS: topCharts.map((a, i) => rowHTML(a, { rank: i + 1, category: true })).join(''),
   }));
   pages.push(['index.html', SITE_URL + '/']);
 
@@ -379,7 +385,7 @@ function main() {
     HEADER: header('/charts/'),
     FOOTER: footer(),
     SCRIPTS,
-    ROWS: byDownloads.map(rowHTML).join(''),
+    ROWS: chartsPageOrder.map(rowHTML).join(''),
   }));
   pages.push(['charts/index.html', SITE_URL + '/charts/']);
   write('search/index.html', fill(searchTpl, {

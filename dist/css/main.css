@@ -281,3 +281,62 @@ img, svg { display: block; }
   html { scroll-behavior: auto; }
   .h-search-box { transition: none; }
 }
+
+/* ---------- theme-switch transition ---------- */
+/* theme.js adds .theme-anim to <html> only while the user is switching
+   themes (removed ~350ms later), so the first page load and OS-driven
+   changes never fade — only the toggle cross-fades. Scoped to
+   theme-relevant properties on the major surfaces only; never a
+   blanket `* { transition: all }`. */
+html.theme-anim body,
+html.theme-anim .s-header,
+html.theme-anim .s-header .nav a,
+html.theme-anim .s-header .logo,
+html.theme-anim .icon-btn,
+html.theme-anim .s-hero,
+html.theme-anim .s-hero p,
+html.theme-anim .s-hero .hero-search input,
+html.theme-anim .s-hero .hero-search button,
+html.theme-anim .rows,
+html.theme-anim .row,
+html.theme-anim .row .dl,
+html.theme-anim .card,
+html.theme-anim .card-strip,
+html.theme-anim .card-nm,
+html.theme-anim .card-cat,
+html.theme-anim .chips a,
+html.theme-anim .trust,
+html.theme-anim .dl-primary,
+html.theme-anim .s-foot,
+html.theme-anim .s-foot a,
+html.theme-anim .sec-head a,
+html.theme-anim .h-search-results {
+  transition: background-color .3s ease, color .3s ease, border-color .3s ease;
+}
+@media (prefers-reduced-motion: reduce) {
+  html.theme-anim body,
+  html.theme-anim .s-header,
+  html.theme-anim .s-header .nav a,
+  html.theme-anim .s-header .logo,
+  html.theme-anim .icon-btn,
+  html.theme-anim .s-hero,
+  html.theme-anim .s-hero p,
+  html.theme-anim .s-hero .hero-search input,
+  html.theme-anim .s-hero .hero-search button,
+  html.theme-anim .rows,
+  html.theme-anim .row,
+  html.theme-anim .row .dl,
+  html.theme-anim .card,
+  html.theme-anim .card-strip,
+  html.theme-anim .card-nm,
+  html.theme-anim .card-cat,
+  html.theme-anim .chips a,
+  html.theme-anim .trust,
+  html.theme-anim .dl-primary,
+  html.theme-anim .s-foot,
+  html.theme-anim .s-foot a,
+  html.theme-anim .sec-head a,
+  html.theme-anim .h-search-results {
+    transition: none;
+  }
+}
