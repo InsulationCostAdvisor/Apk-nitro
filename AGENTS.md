@@ -90,13 +90,16 @@ example of the right order.
 6. Error body text #92400E on light (#FBBF24 on dark).
 7. Hero ONLY on the homepage: wordmark + ONE factual line + search.
    No hero on app pages.
-   Split layout (2026-11-25, research in
-   `research_notes/apknitro-hero-design.md`): text left, real photo
-   right on desktop; on mobile the photo is a small cropped thumb beside
-   the text and adds no height of its own. Photo is a local WebP
-   (`src/assets/hero-phone.webp`, real Unsplash photograph of an Android
-   phone showing app icons — never AI imagery, never hotlinked). Flat
-   look: 1px border, site radius, no gradients, no glass, no shadows.
+   Full-bleed background hero (2026-11-25, user-approved): the image
+   (src/assets/hero-bg.webp, generated in the brand palette — navy/red/
+   white, six realistic app icons, no letter, no text in the image)
+   covers the whole hero, 100vh (100svh where supported), with a solid
+   uniform navy overlay for readability — no gradient. Content is
+   left-aligned and vertically centred: headline + one factual line +
+   search + red "Browse Apps" CTA (smooth-scrolls to #trending). The
+   old side-photo hero (hero-phone.webp) is replaced — do not bring it
+   back. The catalogue sits below the fold on phones by design.
+   Flat look: no gradients, no glass, no shadows except the button.
 8. Mod pages have a mod-notes block (what the mod changes, base version,
    uploader, working %) — only where the data is real, else "tbd".
 9. Sticky bottom download bar in the thumb zone — the SAME button

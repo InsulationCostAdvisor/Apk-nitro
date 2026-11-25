@@ -251,7 +251,7 @@ function main() {
   fs.mkdirSync(path.join(DIST, 'assets', 'logos'), { recursive: true });
   for (const f of fs.readdirSync(path.join(SRC, 'assets', 'logos'))) fs.copyFileSync(path.join(SRC, 'assets', 'logos', f), path.join(DIST, 'assets', 'logos', f));
   fs.copyFileSync(path.join(SRC, 'assets', 'favicon.svg'), path.join(DIST, 'assets', 'favicon.svg'));
-  fs.copyFileSync(path.join(SRC, 'assets', 'hero-phone.webp'), path.join(DIST, 'assets', 'hero-phone.webp'));
+  fs.copyFileSync(path.join(SRC, 'assets', 'hero-bg.webp'), path.join(DIST, 'assets', 'hero-bg.webp'));
 
   const byDownloads = [...apps].sort((x, y) => parseDownloads(y.download_count) - parseDownloads(x.download_count));
   const skipped = [];

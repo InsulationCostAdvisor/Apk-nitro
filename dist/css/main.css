@@ -2,7 +2,7 @@
    no hex colour in this file. */
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
-html { -webkit-text-size-adjust: 100%; }
+html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
 body { background: var(--bg); color: var(--ink); font-family: var(--font-body); }
 a { color: inherit; text-decoration: none; }
 button { font-family: var(--font-body); cursor: pointer; }
@@ -54,13 +54,15 @@ img, svg { display: block; }
 .hs-none { padding: 12px; font-size: 13px; color: var(--meta); }
 
 /* ---------- hero — homepage only ---------- */
-/* Split layout (2026-11-25, from the hero research note): text left, real
-   photo right. Flat look — 1px border, site radius, no gradients, no
-   glass, no shadows. The photo is a local WebP (src/assets/hero-phone.webp):
-   a real photograph of an Android phone showing app icons, not AI imagery. */
-.s-hero { background: var(--navy); color: var(--header-text); padding: 26px 16px 22px; display: flex; align-items: center; gap: 24px; }
-.hero-text { flex: 1; min-width: 0; }
-.hero-photo { flex: 0 0 360px; width: 360px; height: 220px; object-fit: cover; object-position: center 62%; border-radius: 12px; border: 1px solid var(--line); background: var(--p-navy-2); }
+/* Full-bleed background image (2026-11-25, user-approved): hero-bg.webp
+   covers the whole hero, 100vh tall (100svh where supported). Flat look —
+   a solid uniform navy overlay keeps the text readable, no gradient, no
+   glass, no shadows except the primary button. The image is generated in
+   the brand palette (navy/red/white, six realistic app icons, no letter,
+   no text in the image). Same image and overlay in both themes. */
+.s-hero { position: relative; min-height: 100vh; min-height: 100svh; background: var(--navy) url(/assets/hero-bg.webp) right center / cover no-repeat; color: var(--header-text); padding: 26px 16px; display: flex; align-items: center; }
+.s-hero::before { content: ""; position: absolute; inset: 0; background: var(--hero-overlay); }
+.hero-text { position: relative; z-index: 1; flex: 1; min-width: 0; }
 .s-hero h1 { font-family: var(--font-display); font-weight: 900; font-style: italic; font-size: 30px; letter-spacing: -0.5px; line-height: 1.1; }
 .s-hero h1 em { color: var(--red); }
 .s-hero p { margin-top: 8px; font-size: 14px; color: var(--hero-sub); max-width: 520px; }
@@ -68,6 +70,7 @@ img, svg { display: block; }
 .s-hero .hero-search input { flex: 1; min-width: 0; border: 1px solid var(--header-input-border); background: var(--header-input-bg); border-radius: 9px; padding: 12px 14px; color: var(--header-text); font-size: 14px; outline: 0; font-family: var(--font-body); }
 .s-hero .hero-search input::placeholder { color: var(--header-input-placeholder); }
 .s-hero .hero-search button { border: 0; border-radius: 9px; background: var(--hero-btn-bg); color: var(--hero-btn-text); font-weight: 700; font-size: 14px; padding: 0 20px; min-height: 44px; }
+.hero-cta { display: inline-block; margin-top: 16px; background: var(--red); color: var(--p-white); font-weight: 700; font-size: 14px; padding: 12px 22px; border-radius: 9px; }
 
 /* ---------- homepage carousel: "Indispensable on your phone" ---------- */
 /* Full-width: the track runs from the left gutter to the right edge —
@@ -193,7 +196,7 @@ img, svg { display: block; }
 .search-page-form input::placeholder { color: var(--meta); }
 .search-page-form button { border: 0; border-radius: 9px; background: var(--btn-navy); color: var(--header-text); font-weight: 700; font-size: 14px; padding: 0 20px; min-height: 44px; }
 
-/* ---------- mobile: compact hero so 8 rows fit above the fold ---------- */
+/* ---------- mobile ---------- */
 @media (max-width: 640px) {
   .s-header { padding: 8px 12px; }
   .s-header .inner { flex-wrap: wrap; gap: 8px; }
@@ -203,17 +206,16 @@ img, svg { display: block; }
   .s-header .nav.open a { flex: 1 1 40%; }
   .carousel-arrows { display: none; }
   .card { flex-basis: 200px; }
-  .s-hero { padding: 10px 16px; gap: 12px; }
-  .hero-text { flex: 1; min-width: 0; }
-  /* Mobile: the photo is a small cropped thumb beside the text — it adds
-     no height of its own (the text column stays the tall side), so the
-     hero stays compact and the catalogue is not pushed off-screen. */
-  .hero-photo { flex: 0 0 96px; width: 96px; height: 118px; object-position: center; border-radius: 10px; }
+  /* Mobile hero is 100vh (user instruction 2026-11-25) — the catalogue
+     sits below the fold on phones. Background shifted so the icons stay
+     visible on the right and the text stays readable over the overlay. */
+  .s-hero { padding: 10px 16px; background-position: 72% center; }
   .s-hero h1 { font-size: 21px; }
   .s-hero p { margin-top: 4px; font-size: 13px; }
   .s-hero .hero-search { margin-top: 8px; }
   .s-hero .hero-search input { padding: 10px 12px; }
   .s-hero .hero-search button { min-height: 40px; }
+  .hero-cta { margin-top: 12px; }
   .s-sec { padding: 12px 16px 6px; }
   .chips { padding: 2px 0 8px; }
 }
@@ -232,5 +234,6 @@ img, svg { display: block; }
   .h-search-results { top: calc(100% + 12px); right: 0; width: 320px; max-width: calc(100vw - 32px); }
 }
 @media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
   .h-search-box { transition: none; }
 }

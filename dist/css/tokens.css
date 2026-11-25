@@ -38,6 +38,7 @@
   --p-shadow-header: rgba(0, 0, 0, 0.18);
   --p-shadow-bar: rgba(0, 0, 0, 0.12);
   --p-scrim: rgba(0, 0, 0, 0.55);
+  --p-hero-overlay: rgba(11, 27, 48, 0.55);
 
   /* --- semantic --- */
   --red: var(--p-red);
@@ -65,6 +66,7 @@
   --hero-sub: var(--p-hero-sub);
   --hero-btn-bg: var(--p-white);
   --hero-btn-text: var(--p-navy);
+  --hero-overlay: var(--p-hero-overlay);
   --chip-border: var(--line);
   --card-strip: var(--p-offwhite);
   --star: var(--p-navy);
