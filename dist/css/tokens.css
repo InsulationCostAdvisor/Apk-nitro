@@ -39,7 +39,7 @@
   --p-shadow-bar: rgba(0, 0, 0, 0.12);
   --p-scrim: rgba(0, 0, 0, 0.55);
   --p-hero-overlay: rgba(11, 27, 48, 0.55);
-  --p-hero-overlay-light: rgba(247, 248, 250, 0.85);
+  --p-hero-overlay-light: rgba(247, 248, 250, 0.80);
 
   /* --- semantic --- */
   --red: var(--p-red);
