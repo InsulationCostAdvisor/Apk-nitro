@@ -76,10 +76,10 @@ img, svg { display: block; }
 .s-hero p { margin-top: 8px; font-size: 15px; color: var(--hero-sub); max-width: 520px; }
 .s-hero p.hero-intro { margin-top: 10px; font-size: 13px; line-height: 1.55; color: var(--hero-sub); max-width: 560px; }
 .s-hero .hero-search { margin-top: 16px; display: flex; gap: 8px; max-width: 520px; }
-.s-hero .hero-search input { flex: 1; min-width: 0; border: 1px solid var(--hero-input-border); background: var(--hero-input-bg); border-radius: 9px; padding: 12px 14px; min-height: 44px; color: var(--hero-input-text); font-size: 16px; outline: 0; font-family: var(--font-body); }
+.s-hero .hero-search input { flex: 1; min-width: 0; border: 1px solid var(--hero-input-border); background: var(--hero-input-bg); border-radius: 8px; padding: 12px 14px; min-height: 44px; color: var(--hero-input-text); font-size: 16px; outline: 0; font-family: var(--font-body); }
 .s-hero .hero-search input::placeholder { color: var(--hero-input-placeholder); }
-.s-hero .hero-search button { border: 1px solid var(--hero-btn-border); border-radius: 9px; background: var(--hero-btn-bg); color: var(--hero-btn-text); font-weight: 700; font-size: 14px; padding: 0 20px; min-height: 44px; }
-.hero-cta { display: inline-flex; align-items: center; min-height: 44px; margin-top: 16px; background: var(--red); color: var(--p-white); font-weight: 700; font-size: 14px; padding: 12px 22px; border-radius: 9px; }
+.s-hero .hero-search button { border: 1px solid var(--hero-btn-border); border-radius: 8px; background: var(--hero-btn-bg); color: var(--hero-btn-text); font-weight: 700; font-size: 14px; padding: 0 20px; min-height: 44px; }
+.hero-cta { display: inline-flex; align-items: center; min-height: 44px; margin-top: 16px; background: var(--red); color: var(--p-white); font-weight: 700; font-size: 14px; padding: 12px 22px; border-radius: 8px; }
 
 /* ---------- homepage carousel: "Indispensable on your phone" ---------- */
 /* Full-width: the track runs from the left gutter to the right edge —
@@ -101,7 +101,7 @@ img, svg { display: block; }
 .card-banner { height: 120px; display: flex; align-items: center; justify-content: center; }
 .card-big { font-family: var(--font-display); font-weight: 900; font-style: italic; font-size: 34px; color: var(--p-white); }
 .card-strip { display: flex; align-items: center; gap: 10px; padding: 10px 12px; background: var(--card-strip); flex: 1; }
-.card-ic { flex: 0 0 40px; width: 40px; height: 40px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-family: var(--font-display); font-weight: 900; font-style: italic; font-size: 15px; color: var(--p-white); }
+.card-ic { flex: 0 0 40px; width: 40px; height: 40px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-family: var(--font-display); font-weight: 900; font-style: italic; font-size: 15px; color: var(--p-white); }
 .card-tx { flex: 1; min-width: 0; }
 .card-nm { font-weight: 700; font-size: 14px; color: var(--ink); display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; text-overflow: ellipsis; }
 .card-cat { font-size: 12px; font-weight: 600; color: var(--red); margin-top: 2px; }
