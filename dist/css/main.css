@@ -319,6 +319,11 @@ img, svg { display: block; }
   .f-cols { grid-template-columns: 1fr; gap: 20px; }
   .s-foot { padding: 28px 16px 22px; }
   .home .s-foot { margin-top: 20px; }
+  /* Footer bar stacks on mobile (homepage polish 7/7): the copyright
+     and the Drive disclaimer become two clean lines instead of a
+     mid-sentence wrap in the space-between flex row. Desktop keeps
+     the row layout. */
+  .f-bar { flex-direction: column; gap: 4px; }
   .g-ic { font-size: 24px; border-radius: 14px; }
   /* Mobile rows (2026-11-25 fix): the ~91px "Download" word button
      squeezed the text column so the rating and category were cut off.
